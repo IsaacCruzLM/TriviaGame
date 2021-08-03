@@ -1,0 +1,22 @@
+header {
+  align-items: center;
+  background-color: gray;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+.userInfo {
+  align-items: center;
+  display: flex;
+}
+
+.userName {
+  margin-left: 15px;
+}
+
+.avatar {
+  border-radius: 25px;
+  height: 50px;
+  width: 50px;
+}

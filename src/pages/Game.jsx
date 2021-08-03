@@ -1,7 +1,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import { fetchQuestions, fetchToken } from '../services';
-import { Question } from '../components';
+import { Header, Question } from '../components';
 // import './PAGE.css';
 
 class Game extends React.Component {
@@ -43,6 +43,7 @@ class Game extends React.Component {
 
     return (
       <div>
+        <Header />
         <p>Game</p>
         { isLoading ? <p>Loading...</p> : <Question /> }
       </div>
