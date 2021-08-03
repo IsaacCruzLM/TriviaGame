@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import { ACTION } from '../redux/actions/ACTION';
 
 // import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
-// import { PAGE } from './pages';
-// import './PAGE.css';
+// import { COMPONENT } from './components';
+// import './COMPONENT.css';
 
-class PAGE extends React.Component {
+class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -20,11 +20,12 @@ class PAGE extends React.Component {
     const { name, value } = target;
     this.setState({ [name]: value });
   }
+
   onClickHandler() {
-    const { dispatchAction } = this.props;
+    // const { dispatchAction } = this.props;
     dispatchAction(this.state);
   }
-    
+
   // componentDidMount() {}
   // componentWillUnmount() {}
   // shouldComponentUpdate() {}
@@ -35,7 +36,7 @@ class PAGE extends React.Component {
 
     return (
       <div>
-        <p>PAGE</p>
+        <p>Header</p>
       </div>
     );
   }
@@ -52,9 +53,9 @@ const mapStateToProps = (state) => (
     STOREINFO: state.reducer,
   }
 );
-export default connect(mapStateToProps, mapDispatchToProps)(PAGE);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
 
-// PAGE.propTypes = {
+// COMPONENT.propTypes = {
 //   var: PropTypes.type.isRequired,
 //   arr: PropTypes.arrayOf(PropTypes.number).isRequired,
 

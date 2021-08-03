@@ -8,7 +8,7 @@ import { ACTION } from '../redux/actions/ACTION';
 // import { COMPONENT } from './components';
 // import './COMPONENT.css';
 
-class COMPONENT extends React.Component {
+class Question extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -20,11 +20,12 @@ class COMPONENT extends React.Component {
     const { name, value } = target;
     this.setState({ [name]: value });
   }
+
   onClickHandler() {
-    const { dispatchAction } = this.props;
+    // const { dispatchAction } = this.props;
     dispatchAction(this.state);
   }
-    
+
   // componentDidMount() {}
   // componentWillUnmount() {}
   // shouldComponentUpdate() {}
@@ -35,7 +36,7 @@ class COMPONENT extends React.Component {
 
     return (
       <div>
-        <p>COMPONENT</p>
+        <p>Question</p>
       </div>
     );
   }
@@ -52,7 +53,7 @@ const mapStateToProps = (state) => (
     STOREINFO: state.reducer,
   }
 );
-export default connect(mapStateToProps, mapDispatchToProps)(COMPONENT);
+export default connect(mapStateToProps, mapDispatchToProps)(Question);
 
 // COMPONENT.propTypes = {
 //   var: PropTypes.type.isRequired,
