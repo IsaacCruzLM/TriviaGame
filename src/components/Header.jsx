@@ -1,70 +1,50 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { ACTION } from '../redux/actions/ACTION';
-
-// import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
-// import { COMPONENT } from './components';
-// import './COMPONENT.css';
+import './Header.css';
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
-    // this.onChangeHandler = this.onChangeHandler.bind(this);
-    // this.onClickHandler = this.onClickHandler.bind(this);
+    this.state = {
+      score: 0,
+    };
   }
-
-  onChangeHandler({ target }) {
-    const { name, value } = target;
-    this.setState({ [name]: value });
-  }
-
-  onClickHandler() {
-    // const { dispatchAction } = this.props;
-    // dispatchAction(this.state);
-  }
-
-  // componentDidMount() {}
-  // componentWillUnmount() {}
-  // shouldComponentUpdate() {}
 
   render() {
-    // const {  } = this.props;
-    // const {  } = this.state;
+    const { userName } = this.props;
+    const { score } = this.state;
 
     return (
-      <div>
-        <p>Header</p>
-      </div>
+      <header>
+        <div className="userInfo">
+          <img
+            data-testid="header-profile-picture"
+            className="avatar"
+            src="https://e7.pngegg.com/pngimages/505/761/png-clipart-login-computer-icons-avatar-icon-monochrome-black-thumbnail.png"
+            alt="Icone do Avatar"
+          />
+          <h2 data-testid="header-player-name" className="userName">
+            {`Jogador: ${userName}`}
+          </h2>
+        </div>
+        <div className="scoreBoard">
+          <h4 data-testid="header-score" className="score">
+            {`Pontos: ${score}`}
+          </h4>
+        </div>
+      </header>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => (
-  {
-    dispatchAction: (payload) => dispatch(ACTION(payload)),
-    // dispatchAsyncAction: (payload) => dispatch(ASYNCACTION(payload)),
-  }
-);
 const mapStateToProps = (state) => (
   {
-    STOREINFO: state.reducer,
+    userName: state.user.nickname,
   }
 );
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps)(Header);
 
-// COMPONENT.propTypes = {
-//   var: PropTypes.type.isRequired,
-//   arr: PropTypes.arrayOf(PropTypes.number).isRequired,
-
-//   obj: PropTypes.shape({
-//     var: PropTypes.type.isRequired,
-//     }).isRequired,
-
-//   optionalUnion: PropTypes.oneOfType([
-//     PropTypes.string,
-//     PropTypes.number,
-//   ]).isRequired,
-// };
+Header.propTypes = {
+  userName: PropTypes.string.isRequired,
+};
