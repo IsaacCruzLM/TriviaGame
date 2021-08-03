@@ -1,8 +1,8 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 
-import { connect } from 'react-redux';
-import { ACTION } from '../redux/actions/ACTION';
+// import { connect } from 'react-redux';
+// import { ACTION } from '../redux/actions/ACTION';
 
 // import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 // import { PAGE } from './pages';
@@ -23,7 +23,7 @@ class Game extends React.Component {
 
   onClickHandler() {
     // const { dispatchAction } = this.props;
-    dispatchAction(this.state);
+    // dispatchAction(this.state);
   }
 
   // componentDidMount() {}
@@ -42,18 +42,20 @@ class Game extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => (
-  {
-    dispatchAction: (payload) => dispatch(ACTION(payload)),
-    dispatchAsyncAction: (payload) => dispatch(ASYNCACTION(payload)),
-  }
-);
-const mapStateToProps = (state) => (
-  {
-    STOREINFO: state.reducer,
-  }
-);
-export default connect(mapStateToProps, mapDispatchToProps)(Game);
+// const mapDispatchToProps = (dispatch) => (
+//   {
+//     // dispatchAction: (payload) => dispatch(ACTION(payload)),
+//     // dispatchAsyncAction: (payload) => dispatch(ASYNCACTION(payload)),
+//   }
+// );
+// const mapStateToProps = (state) => (
+//   {
+//     STOREINFO: state.reducer,
+//   }
+// );
+
+export default Game;
+// export default connect(mapStateToProps, mapDispatchToProps)(Game);
 
 // PAGE.propTypes = {
 //   var: PropTypes.type.isRequired,
