@@ -1,5 +1,5 @@
 import React from 'react';
-import { func } from 'prop-types';
+import { func, shape, number, string } from 'prop-types';
 
 import { connect } from 'react-redux';
 import { addUser } from '../redux/actions';
@@ -42,39 +42,48 @@ class Login extends React.Component {
 
   render() {
     const { email, nickname, btnDisable } = this.state;
+    const { history } = this.props;
 
     return (
-      <form>
-        <label htmlFor="email-input">
-          Email:
+      <>
+        <form>
+          <label htmlFor="email-input">
+            Email:
+            <input
+              type="email"
+              data-testid="input-gravatar-email"
+              id="email-input"
+              name="email"
+              value={ email }
+              onChange={ this.onChangeHandler }
+            />
+          </label>
+          <label htmlFor="nickname-input">
+            Apelido:
+            <input
+              type="nickname"
+              data-testid="input-player-name"
+              id="nickname-input"
+              name="nickname"
+              value={ nickname }
+              onChange={ this.onChangeHandler }
+            />
+          </label>
           <input
-            type="email"
-            data-testid="input-gravatar-email"
-            id="email-input"
-            name="email"
-            value={ email }
-            onChange={ this.onChangeHandler }
+            type="button"
+            data-testid="btn-play"
+            disabled={ btnDisable }
+            value="Jogar"
+            onClick={ this.onClickHandler }
           />
-        </label>
-        <label htmlFor="nickname-input">
-          Apelido:
-          <input
-            type="nickname"
-            data-testid="input-player-name"
-            id="nickname-input"
-            name="nickname"
-            value={ nickname }
-            onChange={ this.onChangeHandler }
-          />
-        </label>
+        </form>
         <input
+          data-testid="btn-settings"
           type="button"
-          data-testid="btn-play"
-          disabled={ btnDisable }
-          value="Jogar"
-          onClick={ this.onClickHandler }
+          value="Settings"
+          onClick={ () => history.push('/settings') }
         />
-      </form>
+      </>
     );
   }
 }
@@ -89,4 +98,9 @@ export default connect(null, mapDispatchToProps)(Login);
 
 Login.propTypes = {
   add: func.isRequired,
+  history: shape({
+    length: number,
+    action: string,
+    push: func,
+  }).isRequired,
 };
