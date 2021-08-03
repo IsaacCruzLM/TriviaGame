@@ -1,19 +1,29 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
-
-// import { connect } from 'react-redux';
-// import { ACTION } from '../redux/actions/ACTION';
-
-// import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
-// import { PAGE } from './pages';
+import { fetchQuestions, fetchToken } from '../services';
+import { Question } from '../components';
 // import './PAGE.css';
 
 class Game extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      questions: null,
+      isLoading: true,
+    };
     // this.onChangeHandler = this.onChangeHandler.bind(this);
     // this.onClickHandler = this.onClickHandler.bind(this);
+  }
+
+  componentDidMount() {
+    fetchToken()
+      .then((token) => {
+        fetchQuestions(token)
+          .then((res) => this.setState({
+            questions: res,
+            isLoading: false,
+          }));
+      });
   }
 
   onChangeHandler({ target }) {
@@ -26,17 +36,15 @@ class Game extends React.Component {
     // dispatchAction(this.state);
   }
 
-  // componentDidMount() {}
-  // componentWillUnmount() {}
-  // shouldComponentUpdate() {}
-
   render() {
     // const {  } = this.props;
-    // const {  } = this.state;
+    const { isLoading, questions } = this.state;
+    console.log(questions);
 
     return (
       <div>
         <p>Game</p>
+        { isLoading ? <p>Loading...</p> : <Question /> }
       </div>
     );
   }
