@@ -23,7 +23,7 @@ class Header extends React.Component {
 
   onClickHandler() {
     // const { dispatchAction } = this.props;
-    dispatchAction(this.state);
+    // dispatchAction(this.state);
   }
 
   // componentDidMount() {}
@@ -45,7 +45,7 @@ class Header extends React.Component {
 const mapDispatchToProps = (dispatch) => (
   {
     dispatchAction: (payload) => dispatch(ACTION(payload)),
-    dispatchAsyncAction: (payload) => dispatch(ASYNCACTION(payload)),
+    // dispatchAsyncAction: (payload) => dispatch(ASYNCACTION(payload)),
   }
 );
 const mapStateToProps = (state) => (

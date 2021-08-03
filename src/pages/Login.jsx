@@ -4,7 +4,7 @@ import { func, shape, number, string } from 'prop-types';
 import { connect } from 'react-redux';
 import { addUser } from '../redux/actions';
 
-// import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 // import { PAGE } from './pages';
 // import './PAGE.css';
 
@@ -27,8 +27,9 @@ class Login extends React.Component {
   }
 
   onClickHandler() {
-    const { add } = this.props;
+    const { add, history } = this.props;
     add(this.state);
+    history.push('/game');
   }
 
   checkValid(value) {
