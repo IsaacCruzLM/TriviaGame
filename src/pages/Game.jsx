@@ -1,14 +1,15 @@
 import React from 'react';
+import { Header } from '../components';
 // import PropTypes from 'prop-types';
 
-import { connect } from 'react-redux';
-import { ACTION } from '../redux/actions/ACTION';
+// import { connect } from 'react-redux';
+// import { ACTION } from '../redux/actions/ACTION';
 
 // import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
-// import { COMPONENT } from './components';
-// import './COMPONENT.css';
+// import { PAGE } from './pages';
+// import './PAGE.css';
 
-class COMPONENT extends React.Component {
+class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -20,11 +21,12 @@ class COMPONENT extends React.Component {
     const { name, value } = target;
     this.setState({ [name]: value });
   }
+
   onClickHandler() {
-    const { dispatchAction } = this.props;
-    dispatchAction(this.state);
+    // const { dispatchAction } = this.props;
+    // dispatchAction(this.state);
   }
-    
+
   // componentDidMount() {}
   // componentWillUnmount() {}
   // shouldComponentUpdate() {}
@@ -35,26 +37,29 @@ class COMPONENT extends React.Component {
 
     return (
       <div>
-        <p>COMPONENT</p>
+        <Header />
+        <p>Game</p>
       </div>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => (
-  {
-    dispatchAction: (payload) => dispatch(ACTION(payload)),
-    dispatchAsyncAction: (payload) => dispatch(ASYNCACTION(payload)),
-  }
-);
-const mapStateToProps = (state) => (
-  {
-    STOREINFO: state.reducer,
-  }
-);
-export default connect(mapStateToProps, mapDispatchToProps)(COMPONENT);
+// const mapDispatchToProps = (dispatch) => (
+//   {
+//     // dispatchAction: (payload) => dispatch(ACTION(payload)),
+//     // dispatchAsyncAction: (payload) => dispatch(ASYNCACTION(payload)),
+//   }
+// );
+// const mapStateToProps = (state) => (
+//   {
+//     STOREINFO: state.reducer,
+//   }
+// );
 
-// COMPONENT.propTypes = {
+export default Game;
+// export default connect(mapStateToProps, mapDispatchToProps)(Game);
+
+// PAGE.propTypes = {
 //   var: PropTypes.type.isRequired,
 //   arr: PropTypes.arrayOf(PropTypes.number).isRequired,
 
