@@ -26,9 +26,10 @@ class Login extends React.Component {
     this.setState({ [name]: value }, this.checkValid(target.value));
   }
 
-  onClickHandler() {
+  async onClickHandler() {
     const { add, history, playerState } = this.props;
-    add(this.state);
+    const { email, nickname } = this.state;
+    await add({ email, nickname });
     localStorage.setItem('state', JSON.stringify({ player: playerState }));
     history.push('/game');
   }

@@ -41,7 +41,7 @@ const BUTTON_PLAY_AGAIN_SELECTOR = '[data-testid="btn-play-again"]';
 
 // login
 
-describe.skip('1 - [TELA DE LOGIN] Crie a tela de login, onde a pessoa que joga deve preencher as informações para iniciar um jogo', () => {
+describe('1 - [TELA DE LOGIN] Crie a tela de login, onde a pessoa que joga deve preencher as informações para iniciar um jogo', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/');
   });
@@ -79,7 +79,7 @@ describe.skip('1 - [TELA DE LOGIN] Crie a tela de login, onde a pessoa que joga 
   });
 });
 
-describe.skip('2 - [TELA DE LOGIN] Crie o botão de iniciar o jogo', () => {
+describe('2 - [TELA DE LOGIN] Crie o botão de iniciar o jogo', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/');
     cy.clearLocalStorage();
@@ -176,7 +176,7 @@ describe('6 - [TELA DE JOGO] Desenvolva o jogo onde só deve ser possível escol
   });
 });
 
-describe.skip('7 - [TELA DE JOGO] Desenvolva o estilo que, ao clicar em uma resposta, a correta deve ficar verde e as incorretas, vermelhas', () => {
+describe('7 - [TELA DE JOGO] Desenvolva o estilo que, ao clicar em uma resposta, a correta deve ficar verde e as incorretas, vermelhas', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/');
     cy.clearLocalStorage();
@@ -214,7 +214,7 @@ describe.skip('7 - [TELA DE JOGO] Desenvolva o estilo que, ao clicar em uma resp
   });
 });
 
-describe.skip('8 - [TELA DE JOGO] Desenvolva um timer onde a pessoa que joga tem 30 segundos para responder', () => {
+describe('8 - [TELA DE JOGO] Desenvolva um timer onde a pessoa que joga tem 30 segundos para responder', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/');
     cy.clearLocalStorage();
