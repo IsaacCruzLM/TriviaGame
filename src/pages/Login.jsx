@@ -2,7 +2,7 @@ import React from 'react';
 import { func, shape, number, string } from 'prop-types';
 
 import { connect } from 'react-redux';
-//import { addUser } from '../redux/actions';
+// import { addUser } from '../redux/actions';
 
 // import { Link } from 'react-router-dom';
 // import { PAGE } from './pages';
