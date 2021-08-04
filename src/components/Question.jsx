@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { shape, string, arrayOf, func, bool } from 'prop-types';
 import './Question.css';
+import NextButton from './NextButton';
 
 import { stopTime } from '../redux/actions';
 
@@ -12,6 +13,7 @@ class Question extends React.Component {
       answers: [],
       correctBtnClass: '',
       incorrectBtnClass: '',
+      answered: false,
     };
     this.shuffleAnswers = this.shuffleAnswers.bind(this);
     this.checkAnswer = this.checkAnswer.bind(this);
@@ -37,34 +39,40 @@ class Question extends React.Component {
     } else {
       console.log('incorrect');
     }
-    this.setState({ correctBtnClass: 'correct-btn', incorrectBtnClass: 'incorrect-btn' });
+    this.setState({
+      correctBtnClass: 'correct-btn',
+      incorrectBtnClass: 'incorrect-btn',
+      answered: true });
   }
 
   render() {
     const { question, isToStopTime } = this.props;
-    const { answers, correctBtnClass, incorrectBtnClass } = this.state;
+    const { answers, correctBtnClass, incorrectBtnClass, answered } = this.state;
     return (
       <div>
-        <p data-testid="question-category">{question.category}</p>
-        <p data-testid="question-text">{question.question}</p>
-        {answers.map((answer) => {
-          const isCorrect = answer === question.correct_answer;
-          return (
-            <input
-              key={ answer }
-              data-testid={
-                isCorrect
-                  ? 'correct-answer'
-                  : `wrong-answer-${question.incorrect_answers.indexOf(answer)}`
-              }
-              type="button"
-              value={ answer }
-              className={ isCorrect ? correctBtnClass : incorrectBtnClass }
-              onClick={ this.checkAnswer }
-              disabled={ isToStopTime }
-            />
-          );
-        })}
+        <div>
+          <p data-testid="question-category">{question.category}</p>
+          <p data-testid="question-text">{question.question}</p>
+          {answers.map((answer) => {
+            const isCorrect = answer === question.correct_answer;
+            return (
+              <input
+                key={ answer }
+                data-testid={
+                  isCorrect
+                    ? 'correct-answer'
+                    : `wrong-answer-${question.incorrect_answers.indexOf(answer)}`
+                }
+                type="button"
+                value={ answer }
+                className={ isCorrect ? correctBtnClass : incorrectBtnClass }
+                onClick={ this.checkAnswer }
+                disabled={ isToStopTime }
+              />
+            );
+          })}
+        </div>
+        {answered ? <NextButton /> : null}
       </div>
     );
   }
