@@ -1,4 +1,4 @@
-// import { DECREASE_TIME, STOP_TIME, RESET_TIME } from '../actions';
+import { DECREASE_TIME, STOP_TIME, RESET_TIME } from '../actions';
 
 const initialState = {
   time: 30,
