@@ -1,5 +1,5 @@
 export const ADD_USER = 'ADD_USER';
-// export const SAVE_PLAYER_INFO = 'SAVE_PLAYER_INFO';
+export const SAVE_PLAYER_INFO = 'SAVE_PLAYER_INFO';
 
 // export const addUser = (user) => (
 //   {
@@ -7,7 +7,6 @@ export const ADD_USER = 'ADD_USER';
 //     user,
 //   }
 // );
-
 
 // export const savePlayerInfo = (player) => (
 //   {
