@@ -1,11 +1,14 @@
 import React from 'react';
 import { shape, string, arrayOf } from 'prop-types';
+import './Question.css';
 
 class Question extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       answers: [],
+      correctBtnClass: '',
+      incorrectBtnClass: '',
     };
     this.shuffleAnswers = this.shuffleAnswers.bind(this);
     this.checkAnswer = this.checkAnswer.bind(this);
@@ -30,28 +33,33 @@ class Question extends React.Component {
     } else {
       console.log('incorrect');
     }
+    this.setState({ correctBtnClass: 'correct-btn', incorrectBtnClass: 'incorrect-btn' });
   }
 
   render() {
     const { question } = this.props;
-    const { answers } = this.state;
+    const { answers, correctBtnClass, incorrectBtnClass } = this.state;
     return (
       <div>
         <p data-testid="question-category">{question.category}</p>
         <p data-testid="question-text">{question.question}</p>
-        {answers.map((answer) => (
-          <input
-            key={ answer }
-            data-testid={
-              answer === question.correct_answer
-                ? 'correct-answer'
-                : `wrong-answer-${question.incorrect_answers.indexOf(answer)}`
-            }
-            type="button"
-            value={ answer }
-            onClick={ this.checkAnswer }
-          />
-        ))}
+        {answers.map((answer) => {
+          const isCorrect = answer === question.correct_answer;
+          return (
+            <input
+              key={ answer }
+              data-testid={
+                isCorrect
+                  ? 'correct-answer'
+                  : `wrong-answer-${question.incorrect_answers.indexOf(answer)}`
+              }
+              type="button"
+              value={ answer }
+              className={ isCorrect ? correctBtnClass : incorrectBtnClass }
+              onClick={ this.checkAnswer }
+            />
+          );
+        })}
       </div>
     );
   }
