@@ -17,10 +17,29 @@ class Question extends React.Component {
     };
     this.shuffleAnswers = this.shuffleAnswers.bind(this);
     this.checkAnswer = this.checkAnswer.bind(this);
+    this.resetButtonStyles = this.resetButtonStyles.bind(this);
   }
 
   componentDidMount() {
     this.shuffleAnswers();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { question, isToStopTime } = this.props;
+    const { answered } = this.state;
+    if (prevProps.question.correct_answer !== question.correct_answer) {
+      this.shuffleAnswers();
+    }
+    if (isToStopTime && !answered) {
+      this.checkAnswer({ target: { value: 'errado' } });
+    }
+  }
+
+  resetButtonStyles() {
+    this.setState({
+      correctBtnClass: '',
+      incorrectBtnClass: '',
+    });
   }
 
   shuffleAnswers() {
@@ -28,7 +47,7 @@ class Question extends React.Component {
     const answers = [...question.incorrect_answers, question.correct_answer];
     const half = 0.5;
     answers.sort(() => Math.random() - half);
-    this.setState({ answers });
+    this.setState({ answers, answered: false });
   }
 
   checkAnswer({ target }) {
@@ -46,8 +65,9 @@ class Question extends React.Component {
   }
 
   render() {
-    const { question, isToStopTime } = this.props;
+    const { question, isToStopTime, funct } = this.props;
     const { answers, correctBtnClass, incorrectBtnClass, answered } = this.state;
+
     return (
       <div>
         <div>
@@ -72,7 +92,11 @@ class Question extends React.Component {
             );
           })}
         </div>
-        {answered ? <NextButton /> : null}
+        {
+          answered
+            ? <NextButton resetStyles={ this.resetButtonStyles } funct={ funct } />
+            : null
+        }
       </div>
     );
   }
@@ -89,6 +113,7 @@ Question.propTypes = {
   }).isRequired,
   stopTheTimer: func.isRequired,
   isToStopTime: bool.isRequired,
+  funct: func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => (

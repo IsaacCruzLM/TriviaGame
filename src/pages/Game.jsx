@@ -1,8 +1,14 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { func } from 'prop-types';
 import { getQuestions } from '../services/api';
 import { Header, Question, Timer } from '../components';
 // import './PAGE.css';
+
+import { resetTime } from '../redux/actions';
+
+const FIVE = 5;
 
 class Game extends React.Component {
   constructor(props) {
@@ -10,8 +16,9 @@ class Game extends React.Component {
     this.state = {
       questions: null,
       isLoading: true,
+      questionIndex: 0,
     };
-    // this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.nextQ = this.nextQ.bind(this);
     // this.onClickHandler = this.onClickHandler.bind(this);
   }
 
@@ -28,52 +35,43 @@ class Game extends React.Component {
     this.setState({ [name]: value });
   }
 
-  onClickHandler() {
-    // const { dispatchAction } = this.props;
-    // dispatchAction(this.state);
+  nextQ() {
+    const { resetTimer } = this.props;
+    this.setState((prevState) => ({
+      questionIndex: prevState.questionIndex + 1,
+    }));
+    resetTimer();
   }
 
   render() {
     // const {  } = this.props;
-    const { isLoading, questions } = this.state;
-    // console.log(questions);
+    const { isLoading, questions, questionIndex } = this.state;
+
+    if (questionIndex === FIVE) return <Redirect to="/settings" />;
 
     return (
       <div>
         <Header />
         <p>Game</p>
-        { isLoading ? <p>Loading...</p> : <Question question={ questions[0] } /> }
+        {
+          isLoading
+            ? <p>Loading...</p>
+            : <Question funct={ this.nextQ } question={ questions[questionIndex] } />
+        }
         <Timer />
       </div>
     );
   }
 }
 
-// const mapDispatchToProps = (dispatch) => (
-//   {
-//     // dispatchAction: (payload) => dispatch(ACTION(payload)),
-//     // dispatchAsyncAction: (payload) => dispatch(ASYNCACTION(payload)),
-//   }
-// );
-// const mapStateToProps = (state) => (
-//   {
-//     STOREINFO: state.reducer,
-//   }
-// );
+const mapDispatchToProps = (dispatch) => (
+  {
+    resetTimer: () => dispatch(resetTime()),
+  }
+);
 
-export default Game;
-// export default connect(mapStateToProps, mapDispatchToProps)(Game);
+export default connect(null, mapDispatchToProps)(Game);
 
-// PAGE.propTypes = {
-//   var: PropTypes.type.isRequired,
-//   arr: PropTypes.arrayOf(PropTypes.number).isRequired,
-
-//   obj: PropTypes.shape({
-//     var: PropTypes.type.isRequired,
-//     }).isRequired,
-
-//   optionalUnion: PropTypes.oneOfType([
-//     PropTypes.string,
-//     PropTypes.number,
-//   ]).isRequired,
-// };
+Game.propTypes = {
+  resetTimer: func.isRequired,
+};
