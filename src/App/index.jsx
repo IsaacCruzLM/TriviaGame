@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Login, Game, Settings } from '../pages';
+import { Login, Game, Settings, Ranking } from '../pages';
 import { localStorageInit } from '../services/localStorage';
 
 // import {  } from '../components';
@@ -25,6 +25,11 @@ export default class App extends React.Component {
           exact
           path="/game"
           render={ (props) => <Game { ...props } /> }
+        />
+        <Route
+          exact
+          path="/ranking"
+          render={ (props) => <Ranking { ...props } /> }
         />
         {/* <Route render={ (props) => <NotFound { ...props } /> } /> */}
       </Switch>
