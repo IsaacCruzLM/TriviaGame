@@ -1,6 +1,9 @@
 import React from 'react';
-import { shape, string, arrayOf } from 'prop-types';
+import { connect } from 'react-redux';
+import { shape, string, arrayOf, func, bool } from 'prop-types';
 import './Question.css';
+
+import { stopTime } from '../redux/actions';
 
 class Question extends React.Component {
   constructor(props) {
@@ -27,7 +30,8 @@ class Question extends React.Component {
   }
 
   checkAnswer({ target }) {
-    const { question } = this.props;
+    const { question, stopTheTimer } = this.props;
+    stopTheTimer();
     if (target.value === question.correct_answer) {
       console.log('correct');
     } else {
@@ -37,7 +41,7 @@ class Question extends React.Component {
   }
 
   render() {
-    const { question } = this.props;
+    const { question, isToStopTime } = this.props;
     const { answers, correctBtnClass, incorrectBtnClass } = this.state;
     return (
       <div>
@@ -57,6 +61,7 @@ class Question extends React.Component {
               value={ answer }
               className={ isCorrect ? correctBtnClass : incorrectBtnClass }
               onClick={ this.checkAnswer }
+              disabled={ isToStopTime }
             />
           );
         })}
@@ -74,6 +79,20 @@ Question.propTypes = {
     correct_answer: string,
     incorrect_answers: arrayOf(string),
   }).isRequired,
+  stopTheTimer: func.isRequired,
+  isToStopTime: bool.isRequired,
 };
 
-export default Question;
+const mapDispatchToProps = (dispatch) => (
+  {
+    stopTheTimer: () => dispatch(stopTime()),
+  }
+);
+
+const mapStateToProps = (state) => (
+  {
+    isToStopTime: state.game.stopTime,
+  }
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Question);
