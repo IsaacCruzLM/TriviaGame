@@ -2,11 +2,20 @@ export const ADD_USER = 'ADD_USER';
 export const SAVE_PLAYER_INFO = 'SAVE_PLAYER_INFO';
 export const DECREASE_TIME = 'DECREASE_TIME';
 export const INCREASE_SCORE = 'INCREASE_SCORE';
+export const STOP_TIME = 'STOP_TIME';
+export const RESET_TIME = 'RESET_TIME';
 
 export const addUser = (user) => (
   {
     type: ADD_USER,
     user,
+  }
+);
+
+export const savePlayerInfo = (player) => (
+  {
+    type: SAVE_PLAYER_INFO,
+    player,
   }
 );
 
@@ -16,7 +25,6 @@ export const decreaseTime = () => (
   }
 );
 
-export const STOP_TIME = 'STOP_TIME';
 
 export const stopTime = () => (
   {
@@ -24,7 +32,6 @@ export const stopTime = () => (
   }
 );
 
-export const RESET_TIME = 'RESET_TIME';
 
 export const resetTime = () => (
   {
