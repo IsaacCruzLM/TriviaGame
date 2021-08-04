@@ -1,4 +1,4 @@
-// import { SAVE_PLAYER_INFO } from '../actions';
+import { SAVE_PLAYER_INFO } from '../actions';
 
 const initialState = {
   name: '',
