@@ -1,11 +1,14 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Login, Game, Settings } from '../pages';
+import { localStorageInit } from '../services/localStorage';
+
 // import {  } from '../components';
 // import './App.css';
 
 export default class App extends React.Component {
   render() {
+    localStorageInit();
     return (
       <Switch>
         <Route
