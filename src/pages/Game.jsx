@@ -1,7 +1,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import { getQuestions } from '../services/api';
-import { Header, Question } from '../components';
+import { Header, Question, Timer } from '../components';
 // import './PAGE.css';
 
 class Game extends React.Component {
@@ -43,6 +43,7 @@ class Game extends React.Component {
         <Header />
         <p>Game</p>
         { isLoading ? <p>Loading...</p> : <Question question={ questions[0] } /> }
+        <Timer />
       </div>
     );
   }
