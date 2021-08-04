@@ -39,13 +39,13 @@ class Game extends React.Component {
   render() {
     // const {  } = this.props;
     const { isLoading, questions } = this.state;
-    console.log(questions);
+    // console.log(questions);
 
     return (
       <div>
         <Header />
         <p>Game</p>
-        { isLoading ? <p>Loading...</p> : <Question /> }
+        { isLoading ? <p>Loading...</p> : <Question question={ questions[0] } /> }
       </div>
     );
   }
