@@ -1,6 +1,6 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
-import { fetchQuestions, fetchToken } from '../services';
+import { getQuestions } from '../services/api';
 import { Header, Question } from '../components';
 // import './PAGE.css';
 
@@ -16,14 +16,11 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
-    fetchToken()
-      .then((token) => {
-        fetchQuestions(token)
-          .then((res) => this.setState({
-            questions: res,
-            isLoading: false,
-          }));
-      });
+    getQuestions()
+      .then((questions) => this.setState({
+        questions,
+        isLoading: false,
+      }));
   }
 
   onChangeHandler({ target }) {
