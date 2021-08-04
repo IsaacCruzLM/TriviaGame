@@ -1,5 +1,5 @@
 import React from 'react';
-import { shape, string, arrayOf } from 'prop-types';
+import { shape, string, arrayOf, number, func } from 'prop-types';
 import './Question.css';
 
 class Question extends React.Component {
@@ -27,9 +27,15 @@ class Question extends React.Component {
   }
 
   checkAnswer({ target }) {
-    const { question } = this.props;
-    if (target.value === question.correct_answer) {
+    const { question, timer, addPoints } = this.props;
+    const { correct_answer: correctAnswer, difficulty } = question;
+    const levels = ['easy', 'medium', 'hard'];
+    const ten = 10;
+
+    if (target.value === correctAnswer) {
       console.log('correct');
+      const points = ten + (timer * (levels.indexOf(difficulty) + 1));
+      addPoints(points);
     } else {
       console.log('incorrect');
     }
@@ -74,6 +80,16 @@ Question.propTypes = {
     correct_answer: string,
     incorrect_answers: arrayOf(string),
   }).isRequired,
+  timer: number.isRequired,
+  addPoints: func.isRequired,
 };
 
-export default Question;
+const mapStateToProps = (state) => ({
+  timer: state.player.time,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  addPoints: (points) => dispatch(addScore(points)),
+});
+
+export default (mapStateToProps, mapDispatchToProps)(Question);
