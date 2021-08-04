@@ -1,70 +1,79 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-
-import { connect } from 'react-redux';
-import { ACTION } from '../redux/actions/ACTION';
-
-// import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
-// import { COMPONENT } from './components';
-// import './COMPONENT.css';
+import { shape, string, arrayOf } from 'prop-types';
+import './Question.css';
 
 class Question extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
-    // this.onChangeHandler = this.onChangeHandler.bind(this);
-    // this.onClickHandler = this.onClickHandler.bind(this);
+    this.state = {
+      answers: [],
+      correctBtnClass: '',
+      incorrectBtnClass: '',
+    };
+    this.shuffleAnswers = this.shuffleAnswers.bind(this);
+    this.checkAnswer = this.checkAnswer.bind(this);
   }
 
-  onChangeHandler({ target }) {
-    const { name, value } = target;
-    this.setState({ [name]: value });
+  componentDidMount() {
+    this.shuffleAnswers();
   }
 
-  onClickHandler() {
-    // const { dispatchAction } = this.props;
-    dispatchAction(this.state);
+  shuffleAnswers() {
+    const { question } = this.props;
+    const answers = [...question.incorrect_answers, question.correct_answer];
+    const half = 0.5;
+    answers.sort(() => Math.random() - half);
+    this.setState({ answers });
   }
 
-  // componentDidMount() {}
-  // componentWillUnmount() {}
-  // shouldComponentUpdate() {}
+  checkAnswer({ target }) {
+    const { question } = this.props;
+    if (target.value === question.correct_answer) {
+      console.log('correct');
+    } else {
+      console.log('incorrect');
+    }
+    this.setState({ correctBtnClass: 'correct-btn', incorrectBtnClass: 'incorrect-btn' });
+  }
 
   render() {
-    // const {  } = this.props;
-    // const {  } = this.state;
-
+    const { question } = this.props;
+    const { answers, correctBtnClass, incorrectBtnClass } = this.state;
     return (
       <div>
-        <p>Question</p>
+        <p data-testid="question-category">{question.category}</p>
+        <p data-testid="question-text">{question.question}</p>
+        {answers.map((answer) => {
+          const isCorrect = answer === question.correct_answer;
+          return (
+            <input
+              key={ answer }
+              data-testid={
+                isCorrect
+                  ? 'correct-answer'
+                  : `wrong-answer-${question.incorrect_answers.indexOf(answer)}`
+              }
+              type="button"
+              value={ answer }
+              className={ isCorrect ? correctBtnClass : incorrectBtnClass }
+              onClick={ this.checkAnswer }
+            />
+          );
+        })}
       </div>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => (
-  {
-    dispatchAction: (payload) => dispatch(ACTION(payload)),
-    dispatchAsyncAction: (payload) => dispatch(ASYNCACTION(payload)),
-  }
-);
-const mapStateToProps = (state) => (
-  {
-    STOREINFO: state.reducer,
-  }
-);
-export default connect(mapStateToProps, mapDispatchToProps)(Question);
+Question.propTypes = {
+  question: shape({
+    category: string,
+    type: string,
+    difficulty: string,
+    question: string,
+    correct_answer: string,
+    incorrect_answers: arrayOf(string),
+  }).isRequired,
+};
 
-// COMPONENT.propTypes = {
-//   var: PropTypes.type.isRequired,
-//   arr: PropTypes.arrayOf(PropTypes.number).isRequired,
-
-//   obj: PropTypes.shape({
-//     var: PropTypes.type.isRequired,
-//     }).isRequired,
-
-//   optionalUnion: PropTypes.oneOfType([
-//     PropTypes.string,
-//     PropTypes.number,
-//   ]).isRequired,
-// };
+export default Question;
