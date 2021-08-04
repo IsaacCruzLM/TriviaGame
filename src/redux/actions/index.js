@@ -14,13 +14,13 @@ export const savePlayerInfo = (player) => (
     type: SAVE_PLAYER_INFO,
     player,
 
-export const DECREASE_TIME = 'DECREASE_TIME';
+// export const DECREASE_TIME = 'DECREASE_TIME';
 
-export const decreaseTime = () => (
-  {
-    type: DECREASE_TIME,
-  }
-);
+// export const decreaseTime = () => (
+//   {
+//     type: DECREASE_TIME,
+//   }
+// );
 
 export const STOP_TIME = 'STOP_TIME';
 
