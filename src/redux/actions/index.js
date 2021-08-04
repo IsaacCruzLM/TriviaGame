@@ -25,24 +25,15 @@ export const decreaseTime = () => (
   }
 );
 
-
 export const stopTime = () => (
   {
     type: STOP_TIME,
   }
 );
 
-
 export const resetTime = () => (
   {
     type: RESET_TIME,
-  }
-);
-
-export const savePlayerInfo = (player) => (
-  {
-    type: SAVE_PLAYER_INFO,
-    player,
   }
 );
 
