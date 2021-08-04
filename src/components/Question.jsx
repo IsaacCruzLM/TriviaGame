@@ -4,7 +4,7 @@ import { shape, string, arrayOf, func, bool } from 'prop-types';
 import './Question.css';
 import NextButton from './NextButton';
 
-import { stopTime } from '../redux/actions';
+//import { stopTime } from '../redux/actions';
 
 class Question extends React.Component {
   constructor(props) {
