@@ -27,8 +27,9 @@ class Login extends React.Component {
   }
 
   onClickHandler() {
-    const { add, history } = this.props;
+    const { add, history, playerState } = this.props;
     add(this.state);
+    localStorage.setItem('state', JSON.stringify({ player: playerState }));
     history.push('/game');
   }
 
@@ -95,7 +96,14 @@ const mapDispatchToProps = (dispatch) => (
     // dispatchAsyncAction: (payload) => dispatch(ASYNCACTION(payload)),
   }
 );
-export default connect(null, mapDispatchToProps)(Login);
+
+const mapStateToProps = (state) => (
+  {
+    playerState: state.player,
+  }
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
 Login.propTypes = {
   add: func.isRequired,
@@ -103,5 +111,11 @@ Login.propTypes = {
     length: number,
     action: string,
     push: func,
+  }).isRequired,
+  playerState: shape({
+    name: string,
+    assertions: number,
+    score: number,
+    gravatarEmail: string,
   }).isRequired,
 };
