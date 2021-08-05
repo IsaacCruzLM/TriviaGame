@@ -24,7 +24,9 @@ class Question extends React.Component {
   }
 
   componentDidMount() {
+    const { playerState } = this.props;
     this.shuffleAnswers();
+    localStorage.setItem('state', JSON.stringify({ player: playerState }));
   }
 
   componentDidUpdate(prevProps) {

@@ -39,7 +39,7 @@ const FEEDBACK_TOTAL_QUESTION_SELECTOR = '[data-testid="feedback-total-question"
 const BUTTON_PLAY_AGAIN_SELECTOR = '[data-testid="btn-play-again"]';
 
 
-login
+// login
 
 describe('1 - [TELA DE LOGIN] Crie a tela de login, onde a pessoa que joga deve preencher as informações para iniciar um jogo', () => {
   beforeEach(() => {

@@ -25,7 +25,7 @@ const player = (state = initialState, action) => {
   case SAVE_AVATAR:
     return { ...state, gravatarUrl: action.avatar };
   case RESET_ASSERTIONS:
-    return { ...state, assertions: 0 };
+    return { ...state, assertions: 0, score: 0 };
   default:
     return state;
   }
