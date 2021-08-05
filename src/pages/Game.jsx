@@ -47,7 +47,7 @@ class Game extends React.Component {
     // const {  } = this.props;
     const { isLoading, questions, questionIndex } = this.state;
 
-    if (questionIndex === FIVE) return <Redirect to="/settings" />;
+    if (questionIndex === FIVE) return <Redirect to="/feedback" />;
 
     return (
       <div>

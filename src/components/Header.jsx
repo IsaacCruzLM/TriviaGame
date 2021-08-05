@@ -7,13 +7,11 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      score: 0,
     };
   }
 
   render() {
-    const { userName } = this.props;
-    const { score } = this.state;
+    const { userName, score, gravatarUrl } = this.props;
 
     return (
       <header>
@@ -21,7 +19,7 @@ class Header extends React.Component {
           <img
             data-testid="header-profile-picture"
             className="avatar"
-            src="https://e7.pngegg.com/pngimages/505/761/png-clipart-login-computer-icons-avatar-icon-monochrome-black-thumbnail.png"
+            src={ gravatarUrl }
             alt="Icone do Avatar"
           />
           <h2 data-testid="header-player-name" className="userName">
@@ -30,7 +28,7 @@ class Header extends React.Component {
         </div>
         <div className="scoreBoard">
           <h4 data-testid="header-score" className="score">
-            {`Pontos: ${score}`}
+            {score}
           </h4>
         </div>
       </header>
@@ -40,11 +38,16 @@ class Header extends React.Component {
 
 const mapStateToProps = (state) => (
   {
-    userName: state.user.nickname,
+    userName: state.player.name,
+    score: state.player.score,
+    gravatarUrl: state.player.gravatarUrl,
   }
 );
+
 export default connect(mapStateToProps)(Header);
 
 Header.propTypes = {
   userName: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
+  gravatarUrl: PropTypes.string.isRequired,
 };

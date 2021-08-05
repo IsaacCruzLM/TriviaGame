@@ -1,10 +1,10 @@
 import React from 'react';
+import { shape, string, arrayOf, number, func, bool } from 'prop-types';
 import { connect } from 'react-redux';
-import { shape, string, arrayOf, func, bool } from 'prop-types';
 import './Question.css';
 import NextButton from './NextButton';
 
-import { stopTime } from '../redux/actions';
+import { stopTime, increaseScore, correctAnswers } from '../redux/actions';
 
 class Question extends React.Component {
   constructor(props) {
@@ -18,6 +18,8 @@ class Question extends React.Component {
     this.shuffleAnswers = this.shuffleAnswers.bind(this);
     this.checkAnswer = this.checkAnswer.bind(this);
     this.resetButtonStyles = this.resetButtonStyles.bind(this);
+    this.savePlayerToStorage = this.savePlayerToStorage.bind(this);
+    this.savePoints = this.savePoints.bind(this);
   }
 
   componentDidMount() {
@@ -50,14 +52,34 @@ class Question extends React.Component {
     this.setState({ answers, answered: false });
   }
 
+  async savePoints(points) {
+    const { addPoints } = this.props;
+    await addPoints(points);
+    this.savePlayerToStorage();
+  }
+
+  savePlayerToStorage() {
+    const { playerState } = this.props;
+    localStorage.setItem('state', JSON.stringify({ player: playerState }));
+  }
+
   checkAnswer({ target }) {
-    const { question, stopTheTimer } = this.props;
+    const { question, stopTheTimer, timer, corretAnswer } = this.props;
+    const { difficulty } = question;
+    const levels = ['easy', 'medium', 'hard'];
+    const ten = 10;
     stopTheTimer();
+    console.log(timer);
+
     if (target.value === question.correct_answer) {
-      console.log('correct');
+      const points = ten + (timer * (levels.indexOf(difficulty) + 1));
+      console.log(points);
+      this.savePoints(points);
+      corretAnswer();
     } else {
       console.log('incorrect');
     }
+
     this.setState({
       correctBtnClass: 'correct-btn',
       incorrectBtnClass: 'incorrect-btn',
@@ -114,17 +136,30 @@ Question.propTypes = {
   stopTheTimer: func.isRequired,
   isToStopTime: bool.isRequired,
   funct: func.isRequired,
+  timer: number.isRequired,
+  addPoints: func.isRequired,
+  corretAnswer: func.isRequired,
+  playerState: shape({
+    name: string,
+    assertions: number,
+    score: number,
+    gravatarEmail: string,
+  }).isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => (
   {
     stopTheTimer: () => dispatch(stopTime()),
+    addPoints: (points) => dispatch(increaseScore(points)),
+    corretAnswer: () => dispatch(correctAnswers()),
   }
 );
 
 const mapStateToProps = (state) => (
   {
     isToStopTime: state.game.stopTime,
+    timer: state.game.time,
+    playerState: state.player,
   }
 );
 
