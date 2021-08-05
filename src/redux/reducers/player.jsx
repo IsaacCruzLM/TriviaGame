@@ -10,11 +10,11 @@ const initialState = {
 const player = (state = initialState, action) => {
   switch (action.type) {
   case ADD_USER:
-    return { ...state, name: action.user.email, gravatarEmail: action.user.email };
+    return { ...state, name: action.user.name, gravatarEmail: action.user.email };
   case INCREASE_SCORE:
     return { ...state, score: state.score + action.points };
   case SAVE_AVATAR:
-    return { ...state, gravatar: action.avatar };
+    return { ...state, gravatarUrl: action.avatar };
   default:
     return state;
   }
