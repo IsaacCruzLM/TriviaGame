@@ -1,21 +1,16 @@
+import { fetchGravatar } from '../../services/api';
+
 export const ADD_USER = 'ADD_USER';
-export const SAVE_PLAYER_INFO = 'SAVE_PLAYER_INFO';
 export const DECREASE_TIME = 'DECREASE_TIME';
 export const INCREASE_SCORE = 'INCREASE_SCORE';
 export const STOP_TIME = 'STOP_TIME';
 export const RESET_TIME = 'RESET_TIME';
+export const SAVE_AVATAR = 'SAVE_AVATAR';
 
 export const addUser = (user) => (
   {
     type: ADD_USER,
     user,
-  }
-);
-
-export const savePlayerInfo = (player) => (
-  {
-    type: SAVE_PLAYER_INFO,
-    player,
   }
 );
 
@@ -43,3 +38,19 @@ export const increaseScore = (points) => (
     points,
   }
 );
+
+export const saveAvatar = (avatar) => (
+  {
+    type: SAVE_AVATAR,
+    avatar,
+  }
+);
+
+export const fetchAvatar = (email) => async (dispatch) => {
+  try {
+    const avatar = await fetchGravatar(email);
+    dispatch(saveAvatar(avatar));
+  } catch (e) {
+    console.log(e);
+  }
+};

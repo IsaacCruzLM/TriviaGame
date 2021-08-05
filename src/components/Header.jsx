@@ -38,7 +38,7 @@ class Header extends React.Component {
 
 const mapStateToProps = (state) => (
   {
-    userName: state.user.nickname,
+    userName: state.player.name,
     score: state.player.score,
   }
 );
