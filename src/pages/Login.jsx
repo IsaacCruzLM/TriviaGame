@@ -2,7 +2,7 @@ import React from 'react';
 import { func, shape, number, string } from 'prop-types';
 
 import { connect } from 'react-redux';
-import { addUser, fetchAvatar } from '../redux/actions';
+import { addUser, fetchAvatar, resetTime, resetAssertions } from '../redux/actions';
 
 // import { Link } from 'react-router-dom';
 // import { PAGE } from './pages';
@@ -27,12 +27,21 @@ class Login extends React.Component {
   }
 
   async onClickHandler() {
-    const { add, history, playerState, avatarFetch } = this.props;
+    const { add,
+      history,
+      playerState,
+      avatarFetch,
+      resetTimeAction,
+      resetAssertionsAction,
+    } = this.props;
+
     const { email, name } = this.state;
     await add({ email, name });
     await avatarFetch(email);
     localStorage.setItem('state', JSON.stringify({ player: playerState }));
     history.push('/game');
+    resetTimeAction();
+    resetAssertionsAction();
   }
 
   checkValid(value) {
@@ -96,6 +105,8 @@ const mapDispatchToProps = (dispatch) => (
   {
     add: (user) => dispatch(addUser(user)),
     avatarFetch: (email) => dispatch(fetchAvatar(email)),
+    resetTimeAction: () => dispatch(resetTime()),
+    resetAssertionsAction: () => dispatch(resetAssertions()),
   }
 );
 
@@ -110,6 +121,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(Login);
 Login.propTypes = {
   add: func.isRequired,
   avatarFetch: func.isRequired,
+  resetTimeAction: func.isRequired,
+  resetAssertionsAction: func.isRequired,
   history: shape({
     length: number,
     action: string,
