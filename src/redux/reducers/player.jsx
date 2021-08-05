@@ -1,4 +1,4 @@
-import { ADD_USER, INCREASE_SCORE, SAVE_AVATAR } from '../actions';
+import { ADD_USER, INCREASE_SCORE, SAVE_AVATAR, INCREASE_ASSERTIONS } from '../actions';
 
 const initialState = {
   name: '',
@@ -13,6 +13,8 @@ const player = (state = initialState, action) => {
     return { ...state, name: action.user.name, gravatarEmail: action.user.email };
   case INCREASE_SCORE:
     return { ...state, score: state.score + action.points };
+  case INCREASE_ASSERTIONS:
+    return { ...state, assertions: state.assertions + 1 };
   case SAVE_AVATAR:
     return { ...state, gravatarUrl: action.avatar };
   default:

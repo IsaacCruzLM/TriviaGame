@@ -6,6 +6,7 @@ export const INCREASE_SCORE = 'INCREASE_SCORE';
 export const STOP_TIME = 'STOP_TIME';
 export const RESET_TIME = 'RESET_TIME';
 export const SAVE_AVATAR = 'SAVE_AVATAR';
+export const INCREASE_ASSERTIONS = 'INCREASE_ASSERTIONS';
 
 export const addUser = (user) => (
   {
@@ -43,6 +44,12 @@ export const saveAvatar = (avatar) => (
   {
     type: SAVE_AVATAR,
     avatar,
+  }
+);
+
+export const correctAnswers = () => (
+  {
+    type: INCREASE_ASSERTIONS,
   }
 );
 

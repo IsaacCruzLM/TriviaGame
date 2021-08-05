@@ -7,6 +7,8 @@ import { decreaseTime, stopTime } from '../redux/actions';
 
 const ONE_SECOND = 1000;
 
+const intervals = [];
+
 class Timer extends React.Component {
   constructor() {
     super();
@@ -15,13 +17,23 @@ class Timer extends React.Component {
   }
 
   componentDidMount() {
-    setInterval(this.updateTheTime, ONE_SECOND);
+    const interval = setInterval(this.updateTheTime, ONE_SECOND);
+    intervals.push(interval);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { isToStopTime } = this.props;
+    if (prevProps.isToStopTime !== isToStopTime) {
+      const interval = setInterval(this.updateTheTime, ONE_SECOND);
+      intervals.push(interval);
+    }
   }
 
   updateTheTime() {
     const { currentTime, isToStopTime, descrease, stop } = this.props;
     if (currentTime === 0 || isToStopTime) {
       stop();
+      intervals.forEach(clearInterval);
     } else {
       descrease();
     }

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import './Question.css';
 import NextButton from './NextButton';
 
-import { stopTime, increaseScore } from '../redux/actions';
+import { stopTime, increaseScore, correctAnswers } from '../redux/actions';
 
 class Question extends React.Component {
   constructor(props) {
@@ -17,6 +17,7 @@ class Question extends React.Component {
     };
     this.shuffleAnswers = this.shuffleAnswers.bind(this);
     this.checkAnswer = this.checkAnswer.bind(this);
+    this.resetButtonStyles = this.resetButtonStyles.bind(this);
     this.savePlayerToStorage = this.savePlayerToStorage.bind(this);
     this.savePoints = this.savePoints.bind(this);
   }
@@ -25,12 +26,30 @@ class Question extends React.Component {
     this.shuffleAnswers();
   }
 
+  componentDidUpdate(prevProps) {
+    const { question, isToStopTime } = this.props;
+    const { answered } = this.state;
+    if (prevProps.question.correct_answer !== question.correct_answer) {
+      this.shuffleAnswers();
+    }
+    if (isToStopTime && !answered) {
+      this.checkAnswer({ target: { value: 'errado' } });
+    }
+  }
+
+  resetButtonStyles() {
+    this.setState({
+      correctBtnClass: '',
+      incorrectBtnClass: '',
+    });
+  }
+
   shuffleAnswers() {
     const { question } = this.props;
     const answers = [...question.incorrect_answers, question.correct_answer];
     const half = 0.5;
     answers.sort(() => Math.random() - half);
-    this.setState({ answers });
+    this.setState({ answers, answered: false });
   }
 
   async savePoints(points) {
@@ -45,7 +64,7 @@ class Question extends React.Component {
   }
 
   checkAnswer({ target }) {
-    const { question, stopTheTimer, timer } = this.props;
+    const { question, stopTheTimer, timer, corretAnswer } = this.props;
     const { difficulty } = question;
     const levels = ['easy', 'medium', 'hard'];
     const ten = 10;
@@ -56,6 +75,7 @@ class Question extends React.Component {
       const points = ten + (timer * (levels.indexOf(difficulty) + 1));
       console.log(points);
       this.savePoints(points);
+      corretAnswer();
     } else {
       console.log('incorrect');
     }
@@ -67,8 +87,9 @@ class Question extends React.Component {
   }
 
   render() {
-    const { question, isToStopTime } = this.props;
+    const { question, isToStopTime, funct } = this.props;
     const { answers, correctBtnClass, incorrectBtnClass, answered } = this.state;
+
     return (
       <div>
         <div>
@@ -93,7 +114,11 @@ class Question extends React.Component {
             );
           })}
         </div>
-        {answered ? <NextButton /> : null}
+        {
+          answered
+            ? <NextButton resetStyles={ this.resetButtonStyles } funct={ funct } />
+            : null
+        }
       </div>
     );
   }
@@ -110,8 +135,10 @@ Question.propTypes = {
   }).isRequired,
   stopTheTimer: func.isRequired,
   isToStopTime: bool.isRequired,
+  funct: func.isRequired,
   timer: number.isRequired,
   addPoints: func.isRequired,
+  corretAnswer: func.isRequired,
   playerState: shape({
     name: string,
     assertions: number,
@@ -124,6 +151,7 @@ const mapDispatchToProps = (dispatch) => (
   {
     stopTheTimer: () => dispatch(stopTime()),
     addPoints: (points) => dispatch(increaseScore(points)),
+    corretAnswer: () => dispatch(correctAnswers()),
   }
 );
 
