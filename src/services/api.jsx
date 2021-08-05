@@ -34,5 +34,5 @@ export const getQuestions = async () => {
 export const fetchGravatar = async (email) => {
   const hash = md5(email).toString();
   const gravatar = await fetch(`https://www.gravatar.com/avatar/${hash}`);
-  return gravatar;
+  return gravatar.url;
 };

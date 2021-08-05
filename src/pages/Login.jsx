@@ -2,7 +2,7 @@ import React from 'react';
 import { func, shape, number, string } from 'prop-types';
 
 import { connect } from 'react-redux';
-import { addUser } from '../redux/actions';
+import { addUser, fetchAvatar } from '../redux/actions';
 
 // import { Link } from 'react-router-dom';
 // import { PAGE } from './pages';
@@ -13,7 +13,7 @@ class Login extends React.Component {
     super(props);
     this.state = {
       email: '',
-      nickname: '',
+      name: '',
       btnDisable: true,
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -27,16 +27,17 @@ class Login extends React.Component {
   }
 
   async onClickHandler() {
-    const { add, history, playerState } = this.props;
-    const { email, nickname } = this.state;
-    await add({ email, nickname });
+    const { add, history, playerState, avatarFetch } = this.props;
+    const { email, name } = this.state;
+    await add({ email, name });
+    await avatarFetch(email);
     localStorage.setItem('state', JSON.stringify({ player: playerState }));
     history.push('/game');
   }
 
   checkValid(value) {
-    const { email, nickname } = this.state;
-    if (email.length && nickname.length && value) {
+    const { email, name } = this.state;
+    if (email.length && name.length && value) {
       this.setState({ btnDisable: false });
     } else {
       this.setState({ btnDisable: true });
@@ -44,7 +45,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const { email, nickname, btnDisable } = this.state;
+    const { email, name, btnDisable } = this.state;
     const { history } = this.props;
 
     return (
@@ -61,14 +62,14 @@ class Login extends React.Component {
               onChange={ this.onChangeHandler }
             />
           </label>
-          <label htmlFor="nickname-input">
+          <label htmlFor="name-input">
             Apelido:
             <input
-              type="nickname"
+              type="name"
               data-testid="input-player-name"
-              id="nickname-input"
-              name="nickname"
-              value={ nickname }
+              id="name-input"
+              name="name"
+              value={ name }
               onChange={ this.onChangeHandler }
             />
           </label>
@@ -94,7 +95,7 @@ class Login extends React.Component {
 const mapDispatchToProps = (dispatch) => (
   {
     add: (user) => dispatch(addUser(user)),
-    // dispatchAsyncAction: (payload) => dispatch(ASYNCACTION(payload)),
+    avatarFetch: (email) => dispatch(fetchAvatar(email)),
   }
 );
 
@@ -108,6 +109,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
 Login.propTypes = {
   add: func.isRequired,
+  avatarFetch: func.isRequired,
   history: shape({
     length: number,
     action: string,

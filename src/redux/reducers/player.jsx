@@ -1,4 +1,4 @@
-import { SAVE_PLAYER_INFO, INCREASE_SCORE } from '../actions';
+import { ADD_USER, INCREASE_SCORE, SAVE_AVATAR } from '../actions';
 
 const initialState = {
   name: '',
@@ -9,10 +9,12 @@ const initialState = {
 
 const player = (state = initialState, action) => {
   switch (action.type) {
-  case SAVE_PLAYER_INFO:
-    return { ...state, ...action.player };
+  case ADD_USER:
+    return { ...state, name: action.user.name, gravatarEmail: action.user.email };
   case INCREASE_SCORE:
     return { ...state, score: state.score + action.points };
+  case SAVE_AVATAR:
+    return { ...state, gravatarUrl: action.avatar };
   default:
     return state;
   }
