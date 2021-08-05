@@ -3,6 +3,7 @@ import { shape, string, arrayOf, number, func, bool } from 'prop-types';
 import { connect } from 'react-redux';
 import './Question.css';
 import NextButton from './NextButton';
+import { localStorageInit } from '../services/localStorage';
 
 import { stopTime, increaseScore, correctAnswers } from '../redux/actions';
 
@@ -87,6 +88,7 @@ class Question extends React.Component {
   }
 
   render() {
+    localStorageInit();
     const { question, isToStopTime, funct } = this.props;
     const { answers, correctBtnClass, incorrectBtnClass, answered } = this.state;
 

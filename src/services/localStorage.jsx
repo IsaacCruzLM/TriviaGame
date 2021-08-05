@@ -5,7 +5,6 @@ export const localStorageInit = () => {
     const save = JSON.stringify(emtpyArr);
     localStorage.setItem('ranking', save);
   }
-  console.log('LUCAS: LOCAL STORAGE INITIATED');
 };
 
 export const loadTokenFromStorage = () => {
