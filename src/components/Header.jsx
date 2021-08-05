@@ -49,9 +49,5 @@ export default connect(mapStateToProps)(Header);
 Header.propTypes = {
   userName: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired,
-  gravatarUrl: PropTypes.string,
-};
-
-Header.defaultProps = {
-  gravatarUrl: 'https://e7.pngegg.com/pngimages/505/761/png-clipart-login-computer-icons-avatar-icon-monochrome-black-thumbnail.png',
+  gravatarUrl: PropTypes.string.isRequired,
 };
