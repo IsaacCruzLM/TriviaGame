@@ -26,9 +26,11 @@ class Login extends React.Component {
     this.setState({ [name]: value }, this.checkValid(target.value));
   }
 
-  onClickHandler() {
-    const { add, history } = this.props;
-    add(this.state);
+  async onClickHandler() {
+    const { add, history, playerState } = this.props;
+    const { email, nickname } = this.state;
+    await add({ email, nickname });
+    localStorage.setItem('state', JSON.stringify({ player: playerState }));
     history.push('/game');
   }
 
@@ -95,7 +97,14 @@ const mapDispatchToProps = (dispatch) => (
     // dispatchAsyncAction: (payload) => dispatch(ASYNCACTION(payload)),
   }
 );
-export default connect(null, mapDispatchToProps)(Login);
+
+const mapStateToProps = (state) => (
+  {
+    playerState: state.player,
+  }
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
 Login.propTypes = {
   add: func.isRequired,
@@ -103,5 +112,11 @@ Login.propTypes = {
     length: number,
     action: string,
     push: func,
+  }).isRequired,
+  playerState: shape({
+    name: string,
+    assertions: number,
+    score: number,
+    gravatarEmail: string,
   }).isRequired,
 };
