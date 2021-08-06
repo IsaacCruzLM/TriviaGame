@@ -1,9 +1,14 @@
-import { DECREASE_TIME, STOP_TIME, RESET_TIME } from '../actions';
+import { DECREASE_TIME, STOP_TIME, RESET_TIME, SAVE_CATEGORIES } from '../actions';
 
 const initialState = {
   time: 30,
   stopTime: false,
   score: 0,
+  amount: 5,
+  categories: [],
+  selectedCategory: '',
+  selectedDifficulty: '',
+  selectedType: '',
 };
 
 const game = (state = initialState, action) => {
@@ -14,6 +19,8 @@ const game = (state = initialState, action) => {
     return { ...state, stopTime: true };
   case RESET_TIME:
     return { ...state, time: 30, stopTime: false };
+  case SAVE_CATEGORIES:
+    return { ...state, categories: action.categories };
   default:
     return state;
   }

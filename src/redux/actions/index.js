@@ -8,6 +8,9 @@ export const RESET_TIME = 'RESET_TIME';
 export const SAVE_AVATAR = 'SAVE_AVATAR';
 export const INCREASE_ASSERTIONS = 'INCREASE_ASSERTIONS';
 export const RESET_ASSERTIONS = 'RESET_ASSERTIONS';
+export const SAVE_CATEGORIES = 'SAVE_CATEGORIES';
+
+const CATEGORIES_URL = 'https://opentdb.com/api_category.php';
 
 export const addUser = (user) => (
   {
@@ -64,6 +67,40 @@ export const fetchAvatar = (email) => async (dispatch) => {
   try {
     const avatar = await fetchGravatar(email);
     dispatch(saveAvatar(avatar));
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const actionCategories = (categories) => (
+  {
+    type: SAVE_CATEGORIES,
+    categories,
+  }
+);
+
+export const fetchCategories = () => async (dispatch) => {
+  try {
+    const request = await fetch(CATEGORIES_URL);
+    const response = await request.json();
+    dispatch(actionCategories(response.trivia_categories));
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const actionDifficulty = (categories) => (
+  {
+    type: SAVE_CATEGORIES,
+    categories,
+  }
+);
+
+export const fetchDifficulty = () => async (dispatch) => {
+  try {
+    const request = await fetch(CATEGORIES_URL);
+    const response = await request.json();
+    dispatch(actionDifficulty(response.trivia_categories));
   } catch (e) {
     console.log(e);
   }
