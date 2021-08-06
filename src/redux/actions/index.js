@@ -126,7 +126,6 @@ export const saveToken = (token) => (
 export const fetchToken = () => async (dispatch) => {
   try {
     const token = await fetchTokenFromApiAndSave();
-    console.log(token);
     dispatch(saveToken(token));
   } catch (e) {
     console.log(e);
