@@ -31,8 +31,9 @@ class Settings extends React.Component {
   }
 
   onClickHandler() {
-    const { settingsSave } = this.props;
+    const { settingsSave, history } = this.props;
     settingsSave(this.state);
+    history.push('/');
   }
 
   render() {
@@ -102,6 +103,11 @@ Settings.propTypes = {
   categories: shape({
     id: number,
     name: string,
+  }).isRequired,
+  history: shape({
+    length: number,
+    action: string,
+    push: func,
   }).isRequired,
 };
 

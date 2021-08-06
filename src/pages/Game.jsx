@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { func } from 'prop-types';
+import { func, shape, string } from 'prop-types';
 import { getQuestions } from '../services/api';
 import { localStorageInit } from '../services/localStorage';
 import { Header, Question, Timer } from '../components';
@@ -24,7 +24,8 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
-    getQuestions()
+    const { settings } = this.props;
+    getQuestions(settings)
       .then((questions) => this.setState({
         questions,
         isLoading: false,
@@ -74,6 +75,11 @@ class Game extends React.Component {
 const mapStateToProps = (state) => (
   {
     question: state.game.questions,
+    settings: {
+      selectedCategory: state.game.selectedCategory,
+      selectedDifficulty: state.game.selectedDifficulty,
+      selectedType: state.game.selectedType,
+    },
   }
 );
 
@@ -87,4 +93,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(Game);
 
 Game.propTypes = {
   resetTimer: func.isRequired,
+  settings: shape({
+    selectedCategory: string,
+    selectedDifficulty: string,
+    selectedType: string,
+  }).isRequired,
 };
