@@ -72,7 +72,6 @@ class Question extends React.Component {
     const levels = ['easy', 'medium', 'hard'];
     const ten = 10;
     stopTheTimer();
-    console.log(timer);
 
     if (target.value === question.correct_answer) {
       const points = ten + (timer * (levels.indexOf(difficulty) + 1));
