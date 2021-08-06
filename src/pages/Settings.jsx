@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { func, shape, number, string } from 'prop-types';
+import { func, shape, number, string, arrayOf } from 'prop-types';
 // import { connect } from 'react-redux';
 import { fetchCategories, saveSettings } from '../redux/actions';
 
@@ -100,10 +100,10 @@ const mapStateToProps = (state) => ({
 Settings.propTypes = {
   categoriesFetch: func.isRequired,
   settingsSave: func.isRequired,
-  categories: shape({
+  categories: arrayOf(shape({
     id: number,
     name: string,
-  }).isRequired,
+  })).isRequired,
   history: shape({
     length: number,
     action: string,
