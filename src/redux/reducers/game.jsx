@@ -4,6 +4,7 @@ import {
   RESET_TIME,
   SAVE_CATEGORIES,
   SAVE_SETTINGS,
+  SAVE_TOKEN,
 } from '../actions';
 
 const initialState = {
@@ -11,7 +12,9 @@ const initialState = {
   stopTime: false,
   score: 0,
   amount: 5,
+  token: '',
   categories: [],
+  questions: [],
   selectedCategory: '',
   selectedDifficulty: '',
   selectedType: '',
@@ -29,6 +32,8 @@ const game = (state = initialState, action) => {
     return { ...state, categories: action.categories };
   case SAVE_SETTINGS:
     return { ...state, ...action.settings };
+  case SAVE_TOKEN:
+    return { ...state, token: action.token };
   default:
     return state;
   }

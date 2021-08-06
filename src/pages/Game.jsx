@@ -50,7 +50,6 @@ class Game extends React.Component {
   }
 
   render() {
-    console.log('oi');
     const { isLoading, questions, questionIndex } = this.state;
 
     if (questionIndex === FIVE) {
@@ -72,13 +71,19 @@ class Game extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => (
+  {
+    question: state.game.questions,
+  }
+);
+
 const mapDispatchToProps = (dispatch) => (
   {
     resetTimer: () => dispatch(resetTime()),
   }
 );
 
-export default connect(null, mapDispatchToProps)(Game);
+export default connect(mapStateToProps, mapDispatchToProps)(Game);
 
 Game.propTypes = {
   resetTimer: func.isRequired,

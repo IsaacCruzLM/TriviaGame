@@ -2,7 +2,13 @@ import React from 'react';
 import { func, shape, number, string } from 'prop-types';
 
 import { connect } from 'react-redux';
-import { addUser, fetchAvatar, resetTime, resetAssertions } from '../redux/actions';
+import {
+  addUser,
+  fetchAvatar,
+  resetTime,
+  resetAssertions,
+  fetchToken,
+} from '../redux/actions';
 
 // import { Link } from 'react-router-dom';
 // import { PAGE } from './pages';
@@ -21,13 +27,19 @@ class Login extends React.Component {
     this.checkValid = this.checkValid.bind(this);
   }
 
+  componentDidMount() {
+    const { tokenFetch } = this.props;
+    tokenFetch();
+  }
+
   onChangeHandler({ target }) {
     const { name, value } = target;
     this.setState({ [name]: value }, this.checkValid(target.value));
   }
 
   async onClickHandler() {
-    const { add,
+    const {
+      add,
       history,
       playerState,
       avatarFetch,
@@ -101,26 +113,24 @@ class Login extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => (
-  {
-    add: (user) => dispatch(addUser(user)),
-    avatarFetch: (email) => dispatch(fetchAvatar(email)),
-    resetTimeAction: () => dispatch(resetTime()),
-    resetAssertionsAction: () => dispatch(resetAssertions()),
-  }
-);
+const mapDispatchToProps = (dispatch) => ({
+  add: (user) => dispatch(addUser(user)),
+  avatarFetch: (email) => dispatch(fetchAvatar(email)),
+  tokenFetch: () => dispatch(fetchToken()),
+  resetTimeAction: () => dispatch(resetTime()),
+  resetAssertionsAction: () => dispatch(resetAssertions()),
+});
 
-const mapStateToProps = (state) => (
-  {
-    playerState: state.player,
-  }
-);
+const mapStateToProps = (state) => ({
+  playerState: state.player,
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
 Login.propTypes = {
   add: func.isRequired,
   avatarFetch: func.isRequired,
+  tokenFetch: func.isRequired,
   resetTimeAction: func.isRequired,
   resetAssertionsAction: func.isRequired,
   history: shape({

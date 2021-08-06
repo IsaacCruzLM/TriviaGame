@@ -1,4 +1,4 @@
-import { fetchGravatar } from '../../services/api';
+import { fetchGravatar, fetchTokenFromApiAndSave } from '../../services/api';
 
 export const ADD_USER = 'ADD_USER';
 export const DECREASE_TIME = 'DECREASE_TIME';
@@ -10,6 +10,8 @@ export const INCREASE_ASSERTIONS = 'INCREASE_ASSERTIONS';
 export const RESET_ASSERTIONS = 'RESET_ASSERTIONS';
 export const SAVE_CATEGORIES = 'SAVE_CATEGORIES';
 export const SAVE_SETTINGS = 'SAVE_SETTINGS';
+export const SAVE_TOKEN = 'SAVE_TOKEN';
+export const SAVE_QUESTIONS = 'SAVE_QUESTIONS';
 
 const CATEGORIES_URL = 'https://opentdb.com/api_category.php';
 
@@ -113,3 +115,20 @@ export const saveSettings = (settings) => (
     settings,
   }
 );
+
+export const saveToken = (token) => (
+  {
+    type: SAVE_TOKEN,
+    token,
+  }
+);
+
+export const fetchToken = () => async (dispatch) => {
+  try {
+    const token = await fetchTokenFromApiAndSave();
+    console.log(token);
+    dispatch(saveToken(token));
+  } catch (e) {
+    console.log(e);
+  }
+};

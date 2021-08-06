@@ -1,7 +1,7 @@
 import md5 from 'crypto-js/md5';
 import { loadTokenFromStorage, saveTokenToStorage } from './localStorage';
 
-const fetchTokenFromApiAndSave = async () => {
+export const fetchTokenFromApiAndSave = async () => {
   const END_POINT = 'https://opentdb.com/api_token.php?command=request';
   const res = await fetch(END_POINT);
   const jsonRes = await res.json();
