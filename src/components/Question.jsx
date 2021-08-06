@@ -76,11 +76,8 @@ class Question extends React.Component {
 
     if (target.value === question.correct_answer) {
       const points = ten + (timer * (levels.indexOf(difficulty) + 1));
-      console.log(points);
       this.savePoints(points);
       corretAnswer();
-    } else {
-      console.log('incorrect');
     }
 
     this.setState({

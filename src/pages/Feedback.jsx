@@ -1,5 +1,5 @@
 import React from 'react';
-import { shape, string } from 'prop-types';
+import { shape, number } from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
@@ -60,7 +60,7 @@ export default connect(mapStateToProps, null)(Feedback);
 
 Feedback.propTypes = {
   player: shape({
-    assertions: string,
-    score: string,
+    assertions: number,
+    score: number,
   }).isRequired,
 };
