@@ -9,6 +9,7 @@ export const SAVE_AVATAR = 'SAVE_AVATAR';
 export const INCREASE_ASSERTIONS = 'INCREASE_ASSERTIONS';
 export const RESET_ASSERTIONS = 'RESET_ASSERTIONS';
 export const SAVE_CATEGORIES = 'SAVE_CATEGORIES';
+export const SAVE_SETTINGS = 'SAVE_SETTINGS';
 
 const CATEGORIES_URL = 'https://opentdb.com/api_category.php';
 
@@ -105,3 +106,10 @@ export const fetchDifficulty = () => async (dispatch) => {
     console.log(e);
   }
 };
+
+export const saveSettings = (settings) => (
+  {
+    type: SAVE_SETTINGS,
+    settings,
+  }
+);

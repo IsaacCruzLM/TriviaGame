@@ -1,4 +1,10 @@
-import { DECREASE_TIME, STOP_TIME, RESET_TIME, SAVE_CATEGORIES } from '../actions';
+import {
+  DECREASE_TIME,
+  STOP_TIME,
+  RESET_TIME,
+  SAVE_CATEGORIES,
+  SAVE_SETTINGS,
+} from '../actions';
 
 const initialState = {
   time: 30,
@@ -21,6 +27,8 @@ const game = (state = initialState, action) => {
     return { ...state, time: 30, stopTime: false };
   case SAVE_CATEGORIES:
     return { ...state, categories: action.categories };
+  case SAVE_SETTINGS:
+    return { ...state, ...action.settings };
   default:
     return state;
   }

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { func, shape, number, string } from 'prop-types';
 // import { connect } from 'react-redux';
-import { fetchCategories } from '../redux/actions';
+import { fetchCategories, saveSettings } from '../redux/actions';
 
 // import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 // import { PAGE } from './pages';
@@ -12,9 +12,9 @@ class Settings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      category: '',
-      difficulty: '',
-      type: '',
+      selectedCategory: '',
+      selectedDifficulty: '',
+      selectedType: '',
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onClickHandler = this.onClickHandler.bind(this);
@@ -31,22 +31,23 @@ class Settings extends React.Component {
   }
 
   onClickHandler() {
-    
+    const { settingsSave } = this.props;
+    settingsSave(this.state);
   }
 
   render() {
-    const { category, difficulty, type } = this.state;
+    const { selectedCategory, selectedDifficulty, selectedType } = this.state;
     const { categories } = this.props;
     return (
       <>
         <h1 data-testid="settings-title">Settings</h1>
         <form action="">
-          <label htmlFor="category-select">
+          <label htmlFor="selectedCategory-select">
             Category
             <select
-              name="category"
-              id="category-select"
-              value={ category }
+              name="selectedCategory"
+              id="selectedCategory-select"
+              value={ selectedCategory }
               onChange={ this.onChangeHandler }
             >
               {categories.map(({ id, name }) => (
@@ -54,12 +55,12 @@ class Settings extends React.Component {
               ))}
             </select>
           </label>
-          <label htmlFor="difficulty-select">
+          <label htmlFor="selectedDifficulty-select">
             Difficulty
             <select
-              name="difficulty"
-              id="difficulty-select"
-              value={ difficulty }
+              name="selectedDifficulty"
+              id="selectedDifficulty-select"
+              value={ selectedDifficulty }
               onChange={ this.onChangeHandler }
             >
               <option value="easy">Easy</option>
@@ -67,12 +68,12 @@ class Settings extends React.Component {
               <option value="hard">Hard</option>
             </select>
           </label>
-          <label htmlFor="type-select">
+          <label htmlFor="selectedType-select">
             Type
             <select
-              name="type"
-              id="type-select"
-              value={ type }
+              name="selectedType"
+              id="selectedType-select"
+              value={ selectedType }
               onChange={ this.onChangeHandler }
             >
               <option value="multiple">Multiple</option>
@@ -88,6 +89,7 @@ class Settings extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   categoriesFetch: () => dispatch(fetchCategories()),
+  settingsSave: (settings) => dispatch(saveSettings(settings)),
 });
 
 const mapStateToProps = (state) => ({
@@ -96,6 +98,7 @@ const mapStateToProps = (state) => ({
 
 Settings.propTypes = {
   categoriesFetch: func.isRequired,
+  settingsSave: func.isRequired,
   categories: shape({
     id: number,
     name: string,
