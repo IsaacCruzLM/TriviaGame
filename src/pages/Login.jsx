@@ -10,6 +10,7 @@ import {
   resetAssertions,
   fetchToken,
 } from '../redux/actions';
+import img from '../images/trivia.png';
 
 // import { Link } from 'react-router-dom';
 // import { PAGE } from './pages';
@@ -72,6 +73,7 @@ class Login extends React.Component {
 
     return (
       <div className="login">
+        <div><img src={ img } alt="" /></div>
         <form>
           <label htmlFor="email-input">
             {/* Email: */}

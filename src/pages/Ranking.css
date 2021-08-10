@@ -5,9 +5,8 @@
   color: white;
   display: flex;
   flex-direction: column;
-  margin: 80px 0;
-  min-width: 600px;
-  padding: 60px 0;
+  margin: 50px 0;
+  padding: 60px;
 }
 
 .ranking li {
@@ -15,7 +14,12 @@
   border-bottom: rgb(80, 80, 80) dashed 1px;
   display: flex;
   height: 120px;
-  padding: 0 30px;
+  justify-content: space-around;
+}
+
+.ranking-mid {
+  min-width: 300px;
+  text-align: center;
 }
 
 .ranking li:first-child {
@@ -23,11 +27,11 @@
 }
 
 .ranking ol {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  min-width: 600px;
   padding: 0;
-}
-
-.ranking li > * {
-  margin: 0 20px;
 }
 
 .ranking button {
@@ -38,7 +42,6 @@
   color: white;
   cursor: pointer;
   font-size: 20px;
-  margin: 10px 0;
   padding: 15px 20px;
   width: 350px;
 }

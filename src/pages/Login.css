@@ -4,6 +4,42 @@
   padding: 50px 60px;
 }
 
+.login div {
+  align-items: center;
+  display: flex;
+  height: 400px;
+  justify-content: center;
+  width: 800px;
+}
+
+.login img {
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+  animation-name: trivia;
+  animation-timing-function: ease;
+}
+
+@keyframes trivia {
+
+  0% { width: 700px;}
+
+  40% { width: 700px;}
+
+  70% { width: 600px;}
+
+  75% { width: 800px;}
+
+  80% { width: 620px;}
+
+  85% { width: 760px;}
+
+  90% { width: 660px;}
+
+  95% { width: 720px;}
+
+  100% { width: 700px;}
+}
+
 .login > input {
   background-color: rgb(177, 0, 184);
   border: 3px solid #333;
