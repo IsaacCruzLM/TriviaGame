@@ -8,9 +8,7 @@ import {
   Feedback,
 } from '../pages';
 import { localStorageInit } from '../services/localStorage';
-
-// import {  } from '../components';
-// import './App.css';
+import './App.css';
 
 export default class App extends React.Component {
   render() {

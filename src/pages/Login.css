@@ -1,0 +1,37 @@
+.login {
+  background-color: rgb(132, 202, 52);
+  border-radius: 30px;
+  padding: 50px 60px;
+}
+.login form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.login > form input {
+  padding: 15px 20px;
+  margin: 10px 0;
+  border: 3px solid #333;
+  border-radius: 10px;
+  width: 350px;
+  font-size: 22px;
+  box-sizing: border-box;
+}
+.login > form input[type="button"]  {
+  background-color: crimson;
+  text-transform: uppercase;
+  color: white;
+  font-weight: bold;
+}
+.login > form input[type="button"]:disabled  {
+  background-color: rgb(168, 190, 153);
+}
+.login > input {
+  background-color: rgb(124, 124, 124);
+  font-size: 20px;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-top: 60px;
+}

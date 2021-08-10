@@ -1,5 +1,6 @@
 import React from 'react';
 import { func } from 'prop-types';
+import './NextButton.css';
 
 class NextButton extends React.Component {
   constructor() {
@@ -16,6 +17,7 @@ class NextButton extends React.Component {
   render() {
     return (
       <input
+        className="next-button"
         type="button"
         value="Próxima"
         data-testid="btn-next"

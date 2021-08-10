@@ -60,13 +60,13 @@ class Game extends React.Component {
     return (
       <div>
         <Header />
-        <p>Game</p>
+        <Timer />
+        {/* <p>Game</p> */}
         {
           isLoading
             ? <p>Loading...</p>
             : <Question funct={ this.nextQ } question={ questions[questionIndex] } />
         }
-        <Timer />
       </div>
     );
   }

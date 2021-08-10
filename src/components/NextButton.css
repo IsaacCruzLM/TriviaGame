@@ -1,0 +1,13 @@
+.next-button {
+  position: absolute;
+  bottom: 50px;
+  right: 90px;
+  padding: 15px 50px;
+  background-color: rgb(240, 71, 255);
+  color: white;
+  border-radius: 10px;
+  border: none;
+  font-size: 22px;
+  margin-left: auto;
+  margin-top: 50px;
+}

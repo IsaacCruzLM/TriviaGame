@@ -91,29 +91,29 @@ class Question extends React.Component {
     const { answers, correctBtnClass, incorrectBtnClass, answered } = this.state;
 
     return (
-      <div>
-        <div>
-          <p data-testid="question-category">{question.category}</p>
-          <p data-testid="question-text">{question.question}</p>
-          {answers.map((answer) => {
-            const isCorrect = answer === question.correct_answer;
-            return (
-              <input
-                key={ answer }
-                data-testid={
-                  isCorrect
-                    ? 'correct-answer'
-                    : `wrong-answer-${question.incorrect_answers.indexOf(answer)}`
-                }
-                type="button"
-                value={ answer }
-                className={ isCorrect ? correctBtnClass : incorrectBtnClass }
-                onClick={ this.checkAnswer }
-                disabled={ isToStopTime }
-              />
-            );
-          })}
-        </div>
+      <div className="question">
+        {/* <div> */}
+        <h3 data-testid="question-category">{question.category}</h3>
+        <p data-testid="question-text">{question.question}</p>
+        {answers.map((answer) => {
+          const isCorrect = answer === question.correct_answer;
+          return (
+            <input
+              key={ answer }
+              data-testid={
+                isCorrect
+                  ? 'correct-answer'
+                  : `wrong-answer-${question.incorrect_answers.indexOf(answer)}`
+              }
+              type="button"
+              value={ answer }
+              className={ `answer ${isCorrect ? correctBtnClass : incorrectBtnClass}` }
+              onClick={ this.checkAnswer }
+              disabled={ isToStopTime }
+            />
+          );
+        })}
+        {/* </div> */}
         {
           answered
             ? <NextButton resetStyles={ this.resetButtonStyles } funct={ funct } />

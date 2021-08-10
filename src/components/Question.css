@@ -1,3 +1,35 @@
+.question {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(55, 76, 82);
+  max-width: 600px;
+  padding: 40px;
+  padding-bottom: 150px;
+  color: white;
+  border-radius: 20px;
+}
+.question h3 {
+  font-size: 20px;
+}
+.question p {
+  font-size: 28px;
+  margin-bottom: 100px;
+}
+.answer {
+  width: 500px;
+  background-color: rgb(56, 88, 139);
+  color: white;
+  font-size: 22px;
+  border: none;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 3px solid rgb(56, 88, 139);
+}
 .correct-btn {
   border: 3px solid rgb(6, 240, 15);
 }

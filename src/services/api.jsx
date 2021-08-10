@@ -20,6 +20,11 @@ const fetchQuestions = async (token, sets) => {
   const jsonRes = await res.json();
   if (jsonRes.response_code === expiredCode) { return 'token expired'; }
   const questions = jsonRes.results;
+  questions.forEach((question) => {
+    question.question = question.question.replace(/&#039;/g, '\'');
+    question.question = question.question.replace(/&quot;/g, '"');
+    question.question = question.question.replace(/&rdquo;/g, '"');
+  });
   return questions;
 };
 

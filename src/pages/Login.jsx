@@ -1,5 +1,6 @@
 import React from 'react';
 import { func, shape, number, string } from 'prop-types';
+import './Login.css';
 
 import { connect } from 'react-redux';
 import {
@@ -70,26 +71,28 @@ class Login extends React.Component {
     const { history } = this.props;
 
     return (
-      <>
+      <div className="login">
         <form>
           <label htmlFor="email-input">
-            Email:
+            {/* Email: */}
             <input
               type="email"
               data-testid="input-gravatar-email"
               id="email-input"
               name="email"
+              placeholder="Email"
               value={ email }
               onChange={ this.onChangeHandler }
             />
           </label>
           <label htmlFor="name-input">
-            Apelido:
+            {/* Apelido: */}
             <input
               type="name"
               data-testid="input-player-name"
               id="name-input"
               name="name"
+              placeholder="Apelido"
               value={ name }
               onChange={ this.onChangeHandler }
             />
@@ -108,7 +111,7 @@ class Login extends React.Component {
           value="Settings"
           onClick={ () => history.push('/settings') }
         />
-      </>
+      </div>
     );
   }
 }

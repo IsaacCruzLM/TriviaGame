@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { loadRankingFromStorage } from '../services/localStorage';
+import './Ranking.css';
 
 class Ranking extends React.Component {
   render() {
     // localStorageInit();
     const ranking = loadRankingFromStorage();
     return (
-      <div>
+      <div className="ranking">
         <h1 data-testid="ranking-title">Ranking</h1>
         <ol>
           {

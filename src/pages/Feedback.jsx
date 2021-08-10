@@ -3,6 +3,7 @@ import { shape, number } from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
+import './Feedback.css';
 // import { savePlayerInfo } from '../redux/actions';
 
 class Feedback extends React.Component {
@@ -12,7 +13,7 @@ class Feedback extends React.Component {
     return (
       <>
         <Header />
-        <section>
+        <section className="feedback">
           <h1 data-testid="feedback-text">
             { assertions >= threshold ? 'Mandou bem!' : 'Podia ser melhor...' }
           </h1>

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import './Timer.css';
+import './Timer.css';
 
 import { decreaseTime, stopTime } from '../redux/actions';
 
@@ -43,7 +43,7 @@ class Timer extends React.Component {
     const { currentTime } = this.props;
 
     return (
-      <div>
+      <div className="timer">
         {`Tempo Restante: ${currentTime}`}
       </div>
     );
