@@ -8,7 +8,7 @@
   justify-content: center;
   max-width: 600px;
   padding: 40px;
-  padding-bottom: 150px;
+  padding-bottom: 100px;
   position: relative;
 }
 
@@ -18,7 +18,7 @@
 
 .question p {
   font-size: 28px;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 
 .answer {

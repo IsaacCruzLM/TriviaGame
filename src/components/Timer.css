@@ -1,6 +1,33 @@
 .timer {
+  border-radius: 20px;
   color: rgb(249, 251, 120);
   font-size: 25px;
+  justify-content: center;
   margin-bottom: 30px;
-  text-align: center;
+  margin-top: 80px;
+  padding: 10px 15px;
+}
+
+.timer-even {
+  background-color: rgb(52, 80, 19);
+  transition: 200ms;
+}
+
+.timer-odd {
+  background-color: rgb(71, 95, 43);
+  transition: 200ms;
+}
+
+.timer-ten-sec-even {
+  background-color: rgb(255, 251, 0);
+  color: red;
+  font-size: 30px;
+  transition: 100ms;
+}
+
+.timer-ten-sec-odd {
+  background-color: rgb(255, 254, 185);
+  color: red;
+  font-size: 30px;
+  transition: 100ms;
 }
