@@ -14,6 +14,7 @@ class Ranking extends React.Component {
           {
             ranking.map((element, index) => (
               <li key={ index }>
+                <p>{`${index + 1}.`}</p>
                 <p data-testid={ `player-name-${index}` }>{element.player.name}</p>
                 <p data-testid={ `player-score-${index}` }>{element.player.score}</p>
                 <img src={ element.player.gravatarUrl } alt="Avatar" />
@@ -22,7 +23,7 @@ class Ranking extends React.Component {
           }
         </ol>
         <Link to="/" data-testid="btn-go-home">
-          Tela inicial
+          <button type="button">Tela inicial</button>
         </Link>
       </div>
     );

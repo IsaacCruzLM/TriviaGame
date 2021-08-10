@@ -1,6 +1,48 @@
 .ranking {
+  align-items: center;
   background-color: rgb(132, 202, 52);
   border-radius: 15px;
   color: white;
-  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  margin: 80px 0;
+  min-width: 600px;
+  padding: 60px 0;
+}
+
+.ranking li {
+  align-items: center;
+  border-bottom: rgb(80, 80, 80) dashed 1px;
+  display: flex;
+  height: 120px;
+  padding: 0 30px;
+}
+
+.ranking li:first-child {
+  border-top: rgb(80, 80, 80) dashed 1px;
+}
+
+.ranking ol {
+  padding: 0;
+}
+
+.ranking li > * {
+  margin: 0 20px;
+}
+
+.ranking button {
+  background-color: rgb(177, 0, 184);
+  border: 3px solid #333;
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  margin: 10px 0;
+  padding: 15px 20px;
+  width: 350px;
+}
+
+.ranking button:active {
+  background-color: rgb(222, 52, 228);
 }
