@@ -1,12 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { func, shape, number, string, arrayOf } from 'prop-types';
-// import { connect } from 'react-redux';
 import { fetchCategories, saveSettings } from '../redux/actions';
-
-// import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
-// import { PAGE } from './pages';
-// import './PAGE.css';
+import './Settings.css';
 
 class Settings extends React.Component {
   constructor(props) {
@@ -40,7 +36,7 @@ class Settings extends React.Component {
     const { selectedCategory, selectedDifficulty, selectedType } = this.state;
     const { categories } = this.props;
     return (
-      <>
+      <div className="settings">
         <h1 data-testid="settings-title">Settings</h1>
         <form action="">
           <label htmlFor="selectedCategory-select">
@@ -83,7 +79,7 @@ class Settings extends React.Component {
           </label>
           <input type="button" value="Save" onClick={ this.onClickHandler } />
         </form>
-      </>
+      </div>
     );
   }
 }

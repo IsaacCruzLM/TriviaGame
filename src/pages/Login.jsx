@@ -98,6 +98,7 @@ class Login extends React.Component {
             />
           </label>
           <input
+            className="jogar-btn"
             type="button"
             data-testid="btn-play"
             disabled={ btnDisable }

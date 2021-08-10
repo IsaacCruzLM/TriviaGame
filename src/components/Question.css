@@ -1,35 +1,43 @@
 .question {
-  position: relative;
+  align-items: center;
+  background-color: rgb(55, 76, 82);
+  border-radius: 30px;
+  color: white;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  background-color: rgb(55, 76, 82);
   max-width: 600px;
   padding: 40px;
   padding-bottom: 150px;
-  color: white;
-  border-radius: 20px;
+  position: relative;
 }
+
 .question h3 {
   font-size: 20px;
 }
+
 .question p {
   font-size: 28px;
   margin-bottom: 100px;
 }
+
 .answer {
-  width: 500px;
   background-color: rgb(56, 88, 139);
-  color: white;
-  font-size: 22px;
-  border: none;
-  margin-bottom: 20px;
-  border-radius: 15px;
-  padding: 10px;
+  border: 3px solid #333;
+  border-radius: 10px;
   box-sizing: border-box;
-  border: 3px solid rgb(56, 88, 139);
+  color: white;
+  cursor: pointer;
+  font-size: 22px;
+  margin-bottom: 20px;
+  padding: 10px;
+  width: 500px;
 }
+
+.answer:active {
+  background-color: rgb(105, 141, 200);
+}
+
 .correct-btn {
   border: 3px solid rgb(6, 240, 15);
 }

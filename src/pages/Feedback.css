@@ -1,28 +1,37 @@
 .feedback {
-  color: white;
   background-color: rgb(132, 202, 52);
+  border-radius: 30px;
+  color: white;
   padding: 60px;
-  border-radius: 15px;
 }
+
 .feedback h1 {
   font-size: 70px;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
+
 .feedback p {
   font-size: 35px;
-  text-align: center;  
+  text-align: center;
 }
+
 .feedback div {
   display: flex;
   justify-content: space-around;
 }
+
 .feedback button {
-  padding: 10px 20px;
-  font-size: 25px;
-  color: white;
-  border: none;
-  border-radius: 5px;
   background-color: rgb(177, 0, 184);
+  border: 3px solid #333;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 25px;
   margin-top: 80px;
+  padding: 10px 20px;
+}
+
+.feedback button:active {
+  background-color: rgb(222, 52, 228);
 }

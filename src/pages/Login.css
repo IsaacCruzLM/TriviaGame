@@ -3,35 +3,51 @@
   border-radius: 30px;
   padding: 50px 60px;
 }
+
+.login > input {
+  background-color: rgb(177, 0, 184);
+  border: 3px solid #333;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  margin-top: 50px;
+  padding: 10px 20px;
+}
+
+.login > input:active {
+  background-color: rgb(222, 52, 228);
+}
+
 .login form {
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
+
 .login > form input {
-  padding: 15px 20px;
-  margin: 10px 0;
   border: 3px solid #333;
   border-radius: 10px;
-  width: 350px;
-  font-size: 22px;
   box-sizing: border-box;
+  font-size: 22px;
+  margin: 10px 0;
+  padding: 15px 20px;
+  width: 350px;
 }
-.login > form input[type="button"]  {
+
+.login > form .jogar-btn {
   background-color: crimson;
-  text-transform: uppercase;
   color: white;
-  font-weight: bold;
+  cursor: pointer;
+  font-weight: 700;
+  text-transform: uppercase;
 }
-.login > form input[type="button"]:disabled  {
+
+.login > form .jogar-btn:disabled {
   background-color: rgb(168, 190, 153);
 }
-.login > input {
-  background-color: rgb(124, 124, 124);
-  font-size: 20px;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 10px;
-  margin-top: 60px;
+
+.login > form .jogar-btn:active {
+  background-color: rgb(238, 64, 99);
 }
