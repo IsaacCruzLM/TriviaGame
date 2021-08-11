@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import './Question.css';
 import NextButton from './NextButton';
 import { localStorageInit } from '../services/localStorage';
-
 import { stopTime, increaseScore, correctAnswers } from '../redux/actions';
 
 class Question extends React.Component {
@@ -92,7 +91,6 @@ class Question extends React.Component {
 
     return (
       <div className="question">
-        {/* <div> */}
         <h3 data-testid="question-category">{question.category}</h3>
         <p data-testid="question-text">{question.question}</p>
         {answers.map((answer) => {
@@ -113,7 +111,6 @@ class Question extends React.Component {
             />
           );
         })}
-        {/* </div> */}
         {
           answered
             ? <NextButton resetStyles={ this.resetButtonStyles } funct={ funct } />

@@ -2,17 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './Timer.css';
-
 import { decreaseTime, stopTime } from '../redux/actions';
 
 const ONE_SECOND = 1000;
-
 const intervals = [];
 
 class Timer extends React.Component {
   constructor() {
     super();
-
     this.updateTheTime = this.updateTheTime.bind(this);
   }
 

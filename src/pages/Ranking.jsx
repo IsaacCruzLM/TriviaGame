@@ -5,7 +5,6 @@ import './Ranking.css';
 
 class Ranking extends React.Component {
   render() {
-    // localStorageInit();
     const ranking = loadRankingFromStorage();
     return (
       <div className="ranking">

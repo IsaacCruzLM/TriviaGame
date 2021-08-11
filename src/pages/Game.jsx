@@ -5,8 +5,6 @@ import { func, shape, string } from 'prop-types';
 import { getQuestions } from '../services/api';
 import { localStorageInit } from '../services/localStorage';
 import { Header, Question, Timer } from '../components';
-// import './PAGE.css';
-
 import { resetTime } from '../redux/actions';
 
 const FIVE = 5;
@@ -20,7 +18,6 @@ class Game extends React.Component {
       questionIndex: 0,
     };
     this.nextQ = this.nextQ.bind(this);
-    // this.onClickHandler = this.onClickHandler.bind(this);
   }
 
   componentDidMount() {
@@ -61,7 +58,6 @@ class Game extends React.Component {
       <div>
         <Header />
         <Timer />
-        {/* <p>Game</p> */}
         {
           isLoading
             ? <p>Loading...</p>
