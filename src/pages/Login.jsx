@@ -1,7 +1,5 @@
 import React from 'react';
 import { func, shape, number, string } from 'prop-types';
-import './Login.css';
-
 import { connect } from 'react-redux';
 import {
   addUser,
@@ -10,11 +8,8 @@ import {
   resetAssertions,
   fetchToken,
 } from '../redux/actions';
+import './Login.css';
 import img from '../images/trivia.png';
-
-// import { Link } from 'react-router-dom';
-// import { PAGE } from './pages';
-// import './PAGE.css';
 
 class Login extends React.Component {
   constructor(props) {
@@ -26,7 +21,6 @@ class Login extends React.Component {
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onClickHandler = this.onClickHandler.bind(this);
-    this.checkValid = this.checkValid.bind(this);
   }
 
   componentDidMount() {
@@ -35,8 +29,14 @@ class Login extends React.Component {
   }
 
   onChangeHandler({ target }) {
-    const { name, value } = target;
-    this.setState({ [name]: value }, this.checkValid(target.value));
+    this.setState({ [target.name]: target.value }, () => {
+      const { email, name } = this.state;
+      if (email.length && name.length) {
+        this.setState({ btnDisable: false });
+      } else {
+        this.setState({ btnDisable: true });
+      }
+    });
   }
 
   async onClickHandler() {
@@ -58,15 +58,6 @@ class Login extends React.Component {
     resetAssertionsAction();
   }
 
-  checkValid(value) {
-    const { email, name } = this.state;
-    if (email.length && name.length && value) {
-      this.setState({ btnDisable: false });
-    } else {
-      this.setState({ btnDisable: true });
-    }
-  }
-
   render() {
     const { email, name, btnDisable } = this.state;
     const { history } = this.props;
@@ -76,7 +67,6 @@ class Login extends React.Component {
         <div><img src={ img } alt="" /></div>
         <form>
           <label htmlFor="email-input">
-            {/* Email: */}
             <input
               type="email"
               data-testid="input-gravatar-email"
@@ -88,7 +78,6 @@ class Login extends React.Component {
             />
           </label>
           <label htmlFor="name-input">
-            {/* Apelido: */}
             <input
               type="name"
               data-testid="input-player-name"

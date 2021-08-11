@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import './Feedback.css';
-// import { savePlayerInfo } from '../redux/actions';
 
 class Feedback extends React.Component {
   render() {

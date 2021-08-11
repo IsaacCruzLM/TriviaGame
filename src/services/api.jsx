@@ -1,7 +1,7 @@
 import md5 from 'crypto-js/md5';
 import { loadTokenFromStorage, saveTokenToStorage } from './localStorage';
 
-const END_POINT = 'https://opentdb.com/api.php?amount=5&token=';
+const END_POINT = 'https://opentdb.com/api.php?encode=base64&amount=5&token=';
 const TOKEN_END_POINT = 'https://opentdb.com/api_token.php?command=request';
 
 export const fetchTokenFromApiAndSave = async () => {
@@ -21,9 +21,16 @@ const fetchQuestions = async (token, sets) => {
   if (jsonRes.response_code === expiredCode) { return 'token expired'; }
   const questions = jsonRes.results;
   questions.forEach((question) => {
-    question.question = question.question.replace(/&#039;/g, '\'');
-    question.question = question.question.replace(/&quot;/g, '"');
-    question.question = question.question.replace(/&rdquo;/g, '"');
+    question.question = window.atob(question.question);
+    question.category = window.atob(question.category);
+    question.type = window.atob(question.type);
+    question.difficulty = window.atob(question.difficulty);
+    question.correct_answer = window.atob(question.correct_answer);
+    question.incorrect_answers[0] = window.atob(question.incorrect_answers[0]);
+    if (question.incorrect_answers.length > 1) {
+      question.incorrect_answers[1] = window.atob(question.incorrect_answers[1]);
+      question.incorrect_answers[2] = window.atob(question.incorrect_answers[2]);
+    }
   });
   return questions;
 };
