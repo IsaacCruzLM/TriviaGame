@@ -1,9 +1,13 @@
 header {
   align-items: center;
-  background-color: gray;
+  background-color: rgb(132, 202, 52);
   display: flex;
   justify-content: space-between;
-  padding: 10px 20px;
+  left: 0;
+  padding: 0 20px;
+  position: fixed;
+  right: 0;
+  top: 0;
 }
 
 .userInfo {

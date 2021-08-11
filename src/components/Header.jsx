@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import './Header.css';
 
 class Header extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //   };
+  // }
 
   render() {
     const { userName, score, gravatarUrl } = this.props;

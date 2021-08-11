@@ -1,0 +1,42 @@
+.settings {
+  background-color: rgb(132, 202, 52);
+  border-radius: 30px;
+  color: white;
+  padding: 70px;
+}
+
+.settings form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.settings form label {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+}
+
+.settings form select {
+  border: 3px solid #333;
+  border-radius: 10px;
+  font-size: 20px;
+  margin: 10px 0;
+  padding: 5px 10px;
+  width: 500px;
+}
+
+.settings form input {
+  background-color: rgb(177, 0, 184);
+  border: 3px solid #333;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 10px 20px;
+}
+
+.settings form input:active {
+  background-color: rgb(222, 52, 228);
+}

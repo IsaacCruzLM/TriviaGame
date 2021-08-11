@@ -1,0 +1,89 @@
+.login {
+  background-color: rgb(132, 202, 52);
+  border-radius: 30px;
+  padding: 50px 60px;
+}
+
+.login div {
+  align-items: center;
+  display: flex;
+  height: 400px;
+  justify-content: center;
+  width: 800px;
+}
+
+.login img {
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+  animation-name: trivia;
+  animation-timing-function: ease;
+}
+
+@keyframes trivia {
+
+  0% { width: 700px;}
+
+  40% { width: 700px;}
+
+  70% { width: 600px;}
+
+  75% { width: 800px;}
+
+  80% { width: 620px;}
+
+  85% { width: 760px;}
+
+  90% { width: 660px;}
+
+  95% { width: 720px;}
+
+  100% { width: 700px;}
+}
+
+.login > input {
+  background-color: rgb(177, 0, 184);
+  border: 3px solid #333;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  margin-top: 50px;
+  padding: 10px 20px;
+}
+
+.login > form input {
+  border: 3px solid #333;
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-size: 22px;
+  margin: 10px 0;
+  padding: 15px 20px;
+  width: 350px;
+}
+
+.login > input:active {
+  background-color: rgb(222, 52, 228);
+}
+
+.login form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login > form .jogar-btn {
+  background-color: crimson;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.login > form .jogar-btn:disabled {
+  background-color: rgb(168, 190, 153);
+}
+
+.login > form .jogar-btn:active {
+  background-color: rgb(238, 64, 99);
+}

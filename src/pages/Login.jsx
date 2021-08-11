@@ -1,8 +1,16 @@
 import React from 'react';
 import { func, shape, number, string } from 'prop-types';
+import './Login.css';
 
 import { connect } from 'react-redux';
-import { addUser, fetchAvatar, resetTime, resetAssertions } from '../redux/actions';
+import {
+  addUser,
+  fetchAvatar,
+  resetTime,
+  resetAssertions,
+  fetchToken,
+} from '../redux/actions';
+import img from '../images/trivia.png';
 
 // import { Link } from 'react-router-dom';
 // import { PAGE } from './pages';
@@ -21,13 +29,19 @@ class Login extends React.Component {
     this.checkValid = this.checkValid.bind(this);
   }
 
+  componentDidMount() {
+    const { tokenFetch } = this.props;
+    tokenFetch();
+  }
+
   onChangeHandler({ target }) {
     const { name, value } = target;
     this.setState({ [name]: value }, this.checkValid(target.value));
   }
 
   async onClickHandler() {
-    const { add,
+    const {
+      add,
       history,
       playerState,
       avatarFetch,
@@ -58,31 +72,35 @@ class Login extends React.Component {
     const { history } = this.props;
 
     return (
-      <>
+      <div className="login">
+        <div><img src={ img } alt="" /></div>
         <form>
           <label htmlFor="email-input">
-            Email:
+            {/* Email: */}
             <input
               type="email"
               data-testid="input-gravatar-email"
               id="email-input"
               name="email"
+              placeholder="Email"
               value={ email }
               onChange={ this.onChangeHandler }
             />
           </label>
           <label htmlFor="name-input">
-            Apelido:
+            {/* Apelido: */}
             <input
               type="name"
               data-testid="input-player-name"
               id="name-input"
               name="name"
+              placeholder="Apelido"
               value={ name }
               onChange={ this.onChangeHandler }
             />
           </label>
           <input
+            className="jogar-btn"
             type="button"
             data-testid="btn-play"
             disabled={ btnDisable }
@@ -96,31 +114,29 @@ class Login extends React.Component {
           value="Settings"
           onClick={ () => history.push('/settings') }
         />
-      </>
+      </div>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => (
-  {
-    add: (user) => dispatch(addUser(user)),
-    avatarFetch: (email) => dispatch(fetchAvatar(email)),
-    resetTimeAction: () => dispatch(resetTime()),
-    resetAssertionsAction: () => dispatch(resetAssertions()),
-  }
-);
+const mapDispatchToProps = (dispatch) => ({
+  add: (user) => dispatch(addUser(user)),
+  avatarFetch: (email) => dispatch(fetchAvatar(email)),
+  tokenFetch: () => dispatch(fetchToken()),
+  resetTimeAction: () => dispatch(resetTime()),
+  resetAssertionsAction: () => dispatch(resetAssertions()),
+});
 
-const mapStateToProps = (state) => (
-  {
-    playerState: state.player,
-  }
-);
+const mapStateToProps = (state) => ({
+  playerState: state.player,
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
 Login.propTypes = {
   add: func.isRequired,
   avatarFetch: func.isRequired,
+  tokenFetch: func.isRequired,
   resetTimeAction: func.isRequired,
   resetAssertionsAction: func.isRequired,
   history: shape({

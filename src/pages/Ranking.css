@@ -1,0 +1,51 @@
+.ranking {
+  align-items: center;
+  background-color: rgb(132, 202, 52);
+  border-radius: 15px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  margin: 50px 0;
+  padding: 60px;
+}
+
+.ranking li {
+  align-items: center;
+  border-bottom: rgb(80, 80, 80) dashed 1px;
+  display: flex;
+  height: 120px;
+  justify-content: space-around;
+}
+
+.ranking-mid {
+  min-width: 300px;
+  text-align: center;
+}
+
+.ranking li:first-child {
+  border-top: rgb(80, 80, 80) dashed 1px;
+}
+
+.ranking ol {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  min-width: 600px;
+  padding: 0;
+}
+
+.ranking button {
+  background-color: rgb(177, 0, 184);
+  border: 3px solid #333;
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 15px 20px;
+  width: 350px;
+}
+
+.ranking button:active {
+  background-color: rgb(222, 52, 228);
+}

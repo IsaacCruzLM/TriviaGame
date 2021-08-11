@@ -1,0 +1,29 @@
+.next-button {
+  background-color: rgb(177, 0, 184);
+  border: 3px solid #333;
+  border-radius: 10px;
+  bottom: 25px;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  margin-left: auto;
+  margin-top: 50px;
+  padding: 15px 50px;
+  position: absolute;
+  right: 90px;
+}
+
+.login > input {
+  background-color: rgb(177, 0, 184);
+  border: 3px solid #333;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  margin-top: 50px;
+  padding: 10px 20px;
+}
+
+.next-button:active {
+  background-color: rgb(222, 52, 228);
+}

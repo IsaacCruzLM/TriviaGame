@@ -1,29 +1,37 @@
 import md5 from 'crypto-js/md5';
 import { loadTokenFromStorage, saveTokenToStorage } from './localStorage';
 
-const fetchTokenFromApiAndSave = async () => {
-  const END_POINT = 'https://opentdb.com/api_token.php?command=request';
-  const res = await fetch(END_POINT);
+const END_POINT = 'https://opentdb.com/api.php?amount=5&token=';
+const TOKEN_END_POINT = 'https://opentdb.com/api_token.php?command=request';
+
+export const fetchTokenFromApiAndSave = async () => {
+  const res = await fetch(TOKEN_END_POINT);
   const jsonRes = await res.json();
   const { token } = jsonRes;
   saveTokenToStorage(token);
   return token;
 };
 
-const fetchQuestions = async (token) => {
+const fetchQuestions = async (token, sets) => {
   const expiredCode = 3;
-  const END_POINT = `https://opentdb.com/api.php?amount=5&token=${token}`;
-  const res = await fetch(END_POINT);
+  const { selectedCategory: cat, selectedDifficulty: dif, selectedType: typ } = sets;
+  const endPoint = `${END_POINT}${token}&category=${cat}&difficulty=${dif}&type=${typ}`;
+  const res = await fetch(endPoint);
   const jsonRes = await res.json();
   if (jsonRes.response_code === expiredCode) { return 'token expired'; }
   const questions = jsonRes.results;
+  questions.forEach((question) => {
+    question.question = question.question.replace(/&#039;/g, '\'');
+    question.question = question.question.replace(/&quot;/g, '"');
+    question.question = question.question.replace(/&rdquo;/g, '"');
+  });
   return questions;
 };
 
-export const getQuestions = async () => {
+export const getQuestions = async (settings) => {
   let token = loadTokenFromStorage();
   if (token === 'no token in storage') { token = await fetchTokenFromApiAndSave(); }
-  let questions = await fetchQuestions(token);
+  let questions = await fetchQuestions(token, settings);
   if (questions === 'token expired') {
     token = await fetchTokenFromApiAndSave();
     questions = await await fetchQuestions(token);

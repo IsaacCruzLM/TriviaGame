@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import './Timer.css';
+import './Timer.css';
 
 import { decreaseTime, stopTime } from '../redux/actions';
 
@@ -39,11 +39,23 @@ class Timer extends React.Component {
     }
   }
 
+  timerClassName(currentTime) {
+    const ten = 10;
+    if (currentTime > ten) {
+      const className = currentTime % 2 === 0 ? 'timer timer-even' : 'timer timer-odd';
+      return className;
+    }
+    const className = currentTime % 2 === 0
+      ? 'timer timer-ten-sec-even'
+      : 'timer timer-ten-sec-odd';
+    return className;
+  }
+
   render() {
     const { currentTime } = this.props;
 
     return (
-      <div>
+      <div className={ this.timerClassName(currentTime) }>
         {`Tempo Restante: ${currentTime}`}
       </div>
     );
